@@ -24,26 +24,28 @@ public class NoticeController {
   //등록화면
   @GetMapping("")
   public String addForm(@ModelAttribute AddForm addForm) {
-    return "notice/nmainForm";
+    return "notice/notice-writeForm";
   }
 
-  //등록처리
+  //  등록처리
   @PostMapping("")
-  public String add(@ModelAttribute AddForm addForm,
-                    RedirectAttributes redirectAttributes,
-                    Model model) {
+  public String add(
+      @ModelAttribute AddForm addForm,
+      RedirectAttributes redirectAttributes,
+      Model model){
 
-    log.info("AddForm={}", addForm);
+    log.info("NoticeController.add() 호출됨!");
+    log.info("Addform={}",addForm);
 
     Notice notice = new Notice();
     notice.setTitle(addForm.getTitle());
     notice.setContent(addForm.getContent());
     notice.setWrite_name(addForm.getWrite_name());
 
-    Notice writeNotice = noticeSVC.write(notice);
-    redirectAttributes.addAttribute("noticeId", writeNotice.getNoticeId());
+    Notice writedNotice = noticeSVC.write(notice);
+    redirectAttributes.addAttribute("noticeId",writedNotice.getNoticeId());
 
-    return "redirect:/notice/nmainForm";
+    return "redirect:/notice/{noticeId}/nviewForm";  //http://서버:9080/notice/공지사항번호
   }
 
   //  상세화면
