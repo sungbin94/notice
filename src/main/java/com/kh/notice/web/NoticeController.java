@@ -60,7 +60,7 @@ public class NoticeController {
 
     model.addAttribute("detailForm", detailForm);
 
-    return "notice/notice-viewForm";
+    return "notice/nviewForm";
   }
 
 
