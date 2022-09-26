@@ -5,45 +5,17 @@ import com.kh.notice.domain.dao.Notice;
 import java.util.List;
 
 public interface NoticeSVC {
-
-
-
-  /**
-   * 등록
-   * @param notice
-   * @return
-   */
-  Notice save(Notice notice);
-
-  /**
-   * @param noticeId
-   * @return
-   */
-  Notice findById(Long noticeId);
-
-  /**
-   *
-   * @param noticeId
-   * @param notice
-   */
-  void update(long noticeId, Notice notice);
-
-
-  int deleteByNoticeId(Long noticeId);
-
-  //삭제
-  void delete(Long noticeId);
-
-  /**
-   *
-   * @return
-   */
+  //등록
+  Notice write(Notice notice);
+  //전체조회
   List<Notice> findAll();
-
-  /**
-   *
-   */
-  void deleteAll();
-
-
+  //상세
+  Notice findByNoticeId(Long noticeId);
+  //수정
+  Notice modify(Notice notice);
+  //삭제
+  int remove(Long noticeId);
+  //조회수증가
+  int increaseCount(Long noticeId);
 }
+

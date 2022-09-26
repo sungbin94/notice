@@ -5,67 +5,78 @@ import com.kh.notice.domain.dao.NoticeDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class NoticeSVCImpl implements NoticeSVC {
 
   private final NoticeDAO noticeDAO;
 
-
   /**
    * 등록
-   *
    * @param notice
    * @return
    */
   @Override
-  public Notice save(Notice notice) {
-    return noticeDAO.save(notice);
+  public Notice write(Notice notice) {
+
+    return noticeDAO.create(notice);
   }
 
-  @Override
-  public Notice findById(Long noticeId) {
-
-    return noticeDAO.findById(noticeId);
-  }
-
-
-
-  //수정
-  @Override
-  public void update(long noticeId, Notice notice) {
-    noticeDAO.delete(noticeId);
-  }
-
-  @Override
-  public int deleteByNoticeId(Long noticeId) {
-    return 0;
-  }
-
-
-  //삭제
-  @Override
-  public void delete(Long noticeId) {
-    noticeDAO.delete(noticeId);
-  }
-
-  //목록
+  /**
+   * 전체조회
+   * @return
+   */
   @Override
   public List<Notice> findAll() {
-    return noticeDAO.findAll();
+    return noticeDAO.selectAll();
   }
 
-  //전체삭제
+  /**
+   * 상세조회
+   *
+   * @param noticeId
+   * @return
+   */
   @Override
-  public void deleteAll() {
-    noticeDAO.deleteAll();
-
+  public Notice findByNoticeId(Long noticeId) {
+    Notice notice = noticeDAO.selectOne(noticeId);
+    noticeDAO.updateCount(noticeId);
+    return notice;
   }
 
+  /**
+   * 수정
+   * @param notice
+   * @return
+   */
+  @Override
+  public Notice modify(Notice notice) {
+    return noticeDAO.update(notice);
+  }
 
+  /**
+   * 삭제
+   * @param noticeId
+   * @return
+   */
+  @Override
+  public int remove(Long noticeId) {
+    return noticeDAO.delete(noticeId);
+  }
 
+  /**
+   * 조회수 증가
+   * @param noticeId
+   * @return
+   */
+  @Override
+  public int increaseCount(Long noticeId) {
+    return noticeDAO.updateCount(noticeId);
+  }
 }

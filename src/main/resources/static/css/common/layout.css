@@ -162,29 +162,32 @@
   font-size: 28px;
 }
 
-footer{
+/* footer */
+.footer{
   bottom: 0;
   left: 0;
   right: 0;
   background: #111;
-  height: 6vw;
+  height: 60px;
   width: 100vw;
-  padding-top: 40px;
   color: #fff;
+  margin-top: 30px;
 }
 
 .footer-content{
   display: flex;
   align-items: center;
+  height: 300px;
   justify-content: center;
   flex-direction: column;
   text-align: center;
 }
+
 .footer-content a{
-  font-size: 2.1rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 200;
   text-transform: capitalize;
-  line-height: 5rem;
+  line-height: 1.5rem;
   color: #fff;
 }
 
@@ -193,13 +196,14 @@ footer{
 .footer-content span{
   color: var(--main-color-yel);
 }
+
 .footer-content p{
   max-width: 500px;
   margin-top: 40px ;
   line-height: 28px;
   font-size: 14px;
   color: #111;
-  
+
 }
 
 .socials{
@@ -207,8 +211,7 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem 0 3rem 0;
-  
+  margin-top: 20px;
 }
 
 .socials li{
@@ -233,9 +236,6 @@ footer{
   color: aqua;
 }
 
-.footer-menu{
-  margin-bottom: 20px;
-}
 .footer-menu ul{
   display: flex;
 }
@@ -252,15 +252,16 @@ display: block;
   text-decoration: none;
   font-size: 15px;
 }
+
 .footer-menu ul li a:hover{
   color: var(--main-color-yel);
 }
+
 .footer-bottom{
   background: #000;
-  width: 100vw;
-  padding: 20px;
   text-align: center;
 }
+
 .footer-bottom p{
   text-align: center;
   font-size: 14px;
@@ -268,13 +269,15 @@ display: block;
   text-transform: capitalize;
   font-weight: bold;
 }
+
 .footer-bottom p a{
   color: var(--main-color-yel);
 font-size: 16px;
 text-decoration: none;
 }
+
 .footer-bottom span{
   text-transform: uppercase;
-  opacity: .4;
+  opacity: 0.4;
   font-weight: 200;
 }

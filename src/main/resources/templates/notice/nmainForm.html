@@ -8,10 +8,11 @@
   <script src="https://kit.fontawesome.com/844acb7e4d.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/notice/notice board-main.css">
   <link rel="stylesheet" href="/css/common/common.css">
-  <title>공지사항 화면</title>
+  <title>GREAT 공지사항 보기글</title>
 </head>
 
 <body>
+
 <div class="wrapper">
   <header class="header container">
     <nav class="top-menu content">
@@ -129,7 +130,7 @@
             <input type="checkbox" name="" id="allChk"><span>전체선택</span>
           </div>
           <div class="btn__content">
-            <button onclick="location.href='notice-writeForm.html'" class="btn__text">글쓰기</button>
+            <button onclick="location.href='notice board-write.html'" class="btn__text">글쓰기</button>
             <button type="button" onclick="button_event();" class="btn__text">삭제</button>
           </div>
           <div class="text__center">
@@ -156,26 +157,21 @@
                 </select>
               </div>
               <div class="notice-board__search-keyword">
-                <input type="text"/><a href="" class="search__search-icon"><i
+                <input type="text" /><a href="" class="search__search-icon"><i
                   class="fa-solid fa-magnifying-glass"></i></a>
               </div>
 
             </div>
           </div>
         </div>
-      </div>
     </section>
   </main>
   <!--Basic structure of footer-->
-  <footer>
-
+  <footer class="footer">
     <!--The main area of the footer -->
     <div class="footer-content">
-
       <a href="">GR<span>EAT</span></a>
-
       <p>이 페이지는 울산지역의 한정으로 만들어진 사이트입니다. 서비스를 이용하시는 모든 회원분들 이용에 감사드립니다. 더더욱 발전하는 GREAT이 되겠습니다. </p>
-
       <!--Footer's social icon-->
       <ul class="socials">
         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -183,26 +179,21 @@
         <li><a href="#"><i class="fa fa-youtube"></i></a></li>
       </ul>
       <p>GREAT센터 365일 오전 10시 - 오후 6시</p>
-
       <!-- Footer's menu item-->
       <div class="footer-menu">
         <ul class="f-menu">
-          <li><a href="">Home</a></li>
-          <li><a href="">Join</a></li>
-          <li><a href="">Order</a></li>
-          <li><a href="">Notice</a></li>
+          <li><a onclick="location.href='notice board-main.html'" href="">Home</a></li>
+          <li><a onclick="location.href='notice board-view.html'" href="">Join</a></li>
+          <li><a onclick="location.href='notice board-view.html'" href="">Order</a></li>
+          <li><a onclick="location.href='notice board-main.html'" href="">Notice</a></li>
         </ul>
-
       </div>
-
     </div>
-
     <!--Copyright Area-->
     <div class="footer-bottom">
       <p>Design By - <a href="#">365 Team Project</a> </p>
       <p>tell :<a href="">1501-1501</a></p>
     </div>
-
   </footer>
 </div>
 <script>

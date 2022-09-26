@@ -4,41 +4,22 @@ import java.util.List;
 
 public interface NoticeDAO {
 
-  /**
-   * 등록
-   * @param notice
-   * @return
-   */
-  Notice save(Notice notice);
+  //등록
+  Notice create(Notice notice);
 
-  /**
-   * @param noticeId
-   * @return
-   */
-  Notice findById(Long noticeId);
-  /**
-   *
-   * @param noticeId
-   * @param notice
-   */
-  void update(long noticeId, Notice notice);
+  //전체조회
+  List<Notice> selectAll();
 
-  /**
-   *
-   * @param noticeId
-   */
-  void delete(Long noticeId);
+  //상세
+  Notice selectOne(Long noticeId);
 
-  /**
-   *
-   * @return
-   */
-  List<Notice> findAll();
+  //수정
+  Notice update(Notice notice);
 
-  /**
-   *
-   */
-  void deleteAll();
+  //삭제
+  int delete(Long noticeId);
 
+  //조회수증가
+  int updateCount(Long noticeId);
 
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemForm {
+public class DetailForm {
   private Long noticeId;             //공시사항번호
   private String title;             //제목
   private String content;           //내용

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,8 @@ public class Notice{
   private String title;               //--게시글 제목
   private String content;             //--게시글 내용
   private String write_name;          //--작성자(관리자)
-  private int count;
+  private Long count;
+  private LocalDateTime udate;
 
 }
 
