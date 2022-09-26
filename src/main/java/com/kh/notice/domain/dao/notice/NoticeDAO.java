@@ -1,4 +1,6 @@
-package com.kh.notice.domain.dao;
+package com.kh.notice.domain.dao.notice;
+
+import com.kh.notice.domain.entity.Notice;
 
 import java.util.List;
 

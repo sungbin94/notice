@@ -1,5 +1,6 @@
-package com.kh.notice.domain.dao;
+package com.kh.notice.domain.dao.notice;
 
+import com.kh.notice.domain.entity.Notice;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

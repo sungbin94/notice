@@ -1,7 +1,7 @@
-package com.kh.notice.domain.svc;
+package com.kh.notice.domain.svc.notice;
 
-import com.kh.notice.domain.dao.Notice;
-import com.kh.notice.domain.dao.NoticeDAO;
+import com.kh.notice.domain.entity.Notice;
+import com.kh.notice.domain.dao.notice.NoticeDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

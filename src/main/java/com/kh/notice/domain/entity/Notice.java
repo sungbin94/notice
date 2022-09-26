@@ -1,4 +1,4 @@
-package com.kh.notice.domain.dao;
+package com.kh.notice.domain.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
