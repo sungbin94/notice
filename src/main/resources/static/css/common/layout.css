@@ -1,0 +1,280 @@
+@charset "utf-8";
+
+/* * {
+  outline : 1px solid green;
+} */
+
+/* 비율 */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.wrapper>.container>.content {
+  width: 1100px;
+  min-width: 800px;
+}
+
+/* header */
+.header {
+  display: flex;
+  flex-direction: column;
+  height: 156px;
+  width: 100%;
+  border-bottom: 2px solid var(--main-color-gre);
+  max-width: 1900px;
+  align-items: center;
+}
+
+/* 로고인 | 회원가입 */
+.top-menu {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+  list-style: none;
+  font-size: 12px;
+}
+
+.top-menu>.top-menu__member {
+  width: 80px;
+  text-align: center;
+}
+
+.top-menu>.top-menu__member>ul {
+  width: 80px;
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.top-menu>.top-menu__member:hover>ul {
+  display: block;
+}
+
+.top-menu a {
+  margin-left: 10px;
+}
+
+.top-menu a:hover {
+  background-color: #eee;
+  border-radius: 8px;
+  margin-left: 10px;
+  font-size: 12px;
+  transition: all 0.5s;
+}
+
+/* 로고 */
+.logo {
+  display: flex;
+  justify-content: center;
+  font-size: 45px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.logo>a>span {
+  color: var(--main-color-yel);
+}
+
+/* gnb 메뉴 */
+.bottom-menu {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.bottom-menu>.category>ul>li {
+  float: left;
+  width: 140px;
+  height: 35px;
+  position: relative;
+}
+
+.bottom-menu>.category>ul>li>ul {
+  width: 120px;
+  display: none;
+  position: absolute;
+  top: 34px;
+  font-size: 14px;
+  border: 1px solid #eee;
+  background-color: white;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.bottom-menu>.category>ul>li:hover>ul {
+  display: block;
+  z-index: 4;
+}
+
+.bottom-menu>.category>ul>li>ul>li>a {
+  display: inline-block;
+  width: 120px;
+  padding: 5px 0px;
+  text-align: center;
+}
+
+.bottom-menu>.category>ul>li>ul>li:hover {
+  background-color: #eee;
+  transition: all 0.5s;
+}
+
+.bottom-menu>.search {
+  border: 1.5px solid grey;
+  border-radius: 8px;
+  width: 200px;
+  height: 28px;
+
+}
+
+.bottom-menu>.search .search__search-box {
+  border: none;
+}
+
+.bottom-menu>.search .search__search-box:focus {
+  outline: none;
+}
+
+.bottom-menu>.search .search__search-icon {
+  color: grey;
+}
+
+/* main */
+.main {
+  display: block;
+  margin: auto;
+  padding: 1rem 0px 1.5rem;
+  width: 1100px;
+}
+
+.main>.title {
+  text-align: center;
+  font-size: 500px;
+  font-weight: bold;
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.main>.title >span {
+  font-size: 28px;
+}
+
+footer{
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  height: 6vw;
+  width: 100vw;
+  padding-top: 40px;
+  color: #fff;
+}
+
+.footer-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.footer-content a{
+  font-size: 2.1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 5rem;
+  color: #fff;
+}
+
+
+
+.footer-content span{
+  color: var(--main-color-yel);
+}
+.footer-content p{
+  max-width: 500px;
+  margin-top: 40px ;
+  line-height: 28px;
+  font-size: 14px;
+  color: #111;
+  
+}
+
+.socials{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 3rem 0;
+  
+}
+
+.socials li{
+  margin: 0 10px;
+}
+
+.socials a{
+  text-decoration: none;
+  color: #111;
+  border: 1.1px solid black;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.socials a i{
+  font-size: 1.1rem;
+  width: 20px;
+  transition: color .4s ease;
+}
+
+.socials a:hover i{
+  color: aqua;
+}
+
+.footer-menu{
+  margin-bottom: 20px;
+}
+.footer-menu ul{
+  display: flex;
+}
+.footer-menu ul li{
+padding-right: 10px;
+display: block;
+}
+
+.footer-menu ul li a{
+  color: #cfd2d6;
+  border: 1.3px solid white;
+  padding: 6px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 15px;
+}
+.footer-menu ul li a:hover{
+  color: var(--main-color-yel);
+}
+.footer-bottom{
+  background: #000;
+  width: 100vw;
+  padding: 20px;
+  text-align: center;
+}
+.footer-bottom p{
+  text-align: center;
+  font-size: 14px;
+  word-spacing: 2px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.footer-bottom p a{
+  color: var(--main-color-yel);
+font-size: 16px;
+text-decoration: none;
+}
+.footer-bottom span{
+  text-transform: uppercase;
+  opacity: .4;
+  font-weight: 200;
+}

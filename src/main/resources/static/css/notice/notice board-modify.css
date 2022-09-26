@@ -1,0 +1,266 @@
+@charset "utf-8";
+
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.width--800px {
+  width: 800px;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.board__write__content {
+  margin-top: 10px;
+}
+
+.board-write__content{
+  margin-top: 10px;
+}
+
+/* board-write */
+
+.board-write {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px 0px 200px 0px;
+}
+
+/* board-write__title */
+.board-write__title {
+  border-bottom: 1px solid black;
+}
+
+.bar {
+  display: flex;
+  width: 4px;
+  height: 36px;
+  background-color: var(--main-color-yel);
+  margin-right: 10px;
+}
+
+.board-write__title h2 {
+  display: flex;
+  font-size: 28px;
+  color: #333333;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* board-write__article-head */
+.board-write__head {
+  display: flex;
+  margin: 20px 0;
+}
+
+.board-write__title {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.board-write__title input {
+  flex: none;
+  margin-bottom: 10px;
+  width: 870px;
+  box-sizing: border-box;
+  height: 30px;
+  border: 1px solid var(--mainBtn-color-gre);
+}
+
+/* board-write__tool */
+
+.board-write__tool {
+  background-color: var(--main-color-gre);
+}
+
+.board-write__tool-box ul {
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.board-write__tool-box ul li button {
+  border: none;
+}
+
+.board-write__tool-box ul li select {
+  background-color: var(--main-color-gre);
+  border: none;
+}
+
+/* board-write__article-main */
+.board-write__article-content {
+  width: 100%;
+  height: 500px;
+  border: 1px solid var(--mainBtn-color-gre);
+  box-sizing: border-box;
+  resize: none;
+}
+
+/* board-witre__complete */
+.board-witre__complete {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.board-witre__complete button {
+  width: 60px;
+  height: 25px;
+  margin: 5px 0 10px 5px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.board-write__file input {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.board-witre__cancel-btn {
+  background-color: var(--mainBtn-color-gre);
+}
+
+.board-witre__complete-btn {
+  background-color: var(--main-color-yel);
+}
+
+/* footer{
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  height: 5vw;
+  width: 100vw;
+  padding-top: 40px;
+  color: #fff;
+}
+
+.footer-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.footer-content a{
+  font-size: 2.1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 5rem;
+  color: #fff;
+}
+
+
+
+.footer-content span{
+  color: var(--main-color-yel);
+}
+.footer-content p{
+  max-width: 500px;
+  margin-top: 40px ;
+  line-height: 28px;
+  font-size: 14px;
+  color: #111;
+  
+}
+
+.socials{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 3rem 0;
+  
+}
+
+.socials li{
+  margin: 0 10px;
+}
+
+.socials a{
+  text-decoration: none;
+  color: #111;
+  border: 1.1px solid black;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.socials a i{
+  font-size: 1.1rem;
+  width: 20px;
+  transition: color .4s ease;
+}
+
+.socials a:hover i{
+  color: aqua;
+}
+
+.footer-menu{
+  margin-bottom: 20px;
+}
+.footer-menu ul{
+  display: flex;
+}
+.footer-menu ul li{
+padding-right: 10px;
+display: block;
+}
+
+.footer-menu ul li a{
+  color: #cfd2d6;
+  border: 1.3px solid white;
+  padding: 6px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 15px;
+}
+.footer-menu ul li a:hover{
+  color: var(--main-color-yel);
+}
+.footer-bottom{
+  background: #000;
+  width: 100vw;
+  padding: 20px;
+  text-align: center;
+}
+.footer-bottom p{
+  text-align: center;
+  font-size: 14px;
+  word-spacing: 2px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.footer-bottom p a{
+  color: var(--main-color-yel);
+font-size: 16px;
+text-decoration: none;
+}
+.footer-bottom span{
+  text-transform: uppercase;
+  opacity: .4;
+  font-weight: 200;
+}
+@media (max-width:500px) {
+  .footer-menu ul{
+    display: inline;
+  }
+  .footer-menu ul li{
+    margin-bottom: 20px;
+  }
+} */

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/844acb7e4d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/notice/notice board-view.css">
+  <link rel="stylesheet" href="/css/common/common.css">
+
+  <title>공지사항 글보기화면</title>
+</head>
+
+<body>
+<div class="wrapper">
+  <header class="header container">
+    <nav class="top-menu content">
+      <a href="" class="top-menu__name">관리자</a>
+      <a href="" class="top-menu__logout">로그아웃</a>
+      <a href="" class="top-menu__cs">고객센터</a>
+    </nav>
+    <div class="logo content"><a href="">GR<span>EAT</span></a></div>
+    <nav class="bottom-menu content">
+      <div class="category">
+        <ul>
+          <li class="food-category">업종별 카테고리
+            <ul>
+              <li><a href="">한식</a></li>
+              <li><a href="">중식</a></li>
+              <li><a href="">일식</a></li>
+              <li><a href="">양식</a></li>
+              <li><a href="">아시안식</a></li>
+              <li><a href="">분식</a></li>
+              <li><a href="">도시락</a></li>
+              <li><a href="">카페/디저트</a></li>
+            </ul>
+          </li>
+          <li class="region-category">지역별 카테고리
+            <ul>
+              <li><a href="">동구</a></li>
+              <li><a href="">중구</a></li>
+              <li><a href="">북구</a></li>
+              <li><a href="">남구</a></li>
+              <li><a href="">울주군</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="search">
+        <input type="text" class="search__search-box" placeholder="  검색어를 입력하세요.">
+        <a href="" class="search__search-icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    <div class="article ">
+      <div class="article__title ">
+        <h2>글 제목 : <text>[공지사항] 개인정보 처리방침 변경안내처리방침</text></h2>
+      </div>
+      <div class="article__information">
+        <div class="article__write-information">
+          <span class="font-size--12px">2022.08.12</span>
+          <span>|</span>
+          <span class="font-size--12px">조회 18</span>
+        </div>
+      </div>
+
+
+      <div class="article__content ">
+          <textarea cols="140" rows="30"
+                    name="content">[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침[공지사항] 개인정보 처리방침 변경안내처리방침 </textarea>
+
+
+        <div class="article__btn-box">
+          <button onclick="location.href='notice board-Modify.html'" class="Modify">수정</button>
+          <button onclick="location.href='notice board-main.html'" class="submit">목록</button>
+          <button type="button" onclick="button_event();" class="delete">삭제</button>
+        </div>
+      </div>
+
+      </form>
+    </div>
+</div>
+</div>
+</main>
+<!--Basic structure of footer-->
+<footer>
+
+  <!--The main area of the footer -->
+  <div class="footer-content">
+
+    <a href="">GR<span>EAT</span></a>
+
+    <p>이 페이지는 울산지역의 한정으로 만들어진 사이트입니다. 서비스를 이용하시는 모든 회원분들 이용에 감사드립니다. 더더욱 발전하는 GREAT이 되겠습니다. </p>
+
+    <!--Footer's social icon-->
+    <ul class="socials">
+      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+    </ul>
+    <p>GREAT센터 365일 오전 10시 - 오후 6시</p>
+
+    <!-- Footer's menu item-->
+    <div class="footer-menu">
+      <ul class="f-menu">
+        <li><a href="">Home</a></li>
+        <li><a href="">Join</a></li>
+        <li><a href="">Order</a></li>
+        <li><a href="">Notice</a></li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!--Copyright Area-->
+  <div class="footer-bottom">
+    <p>Design By - <a href="#">365 Team Project</a> </p>
+    <p>tell :<a href="">1501-1501</a></p>
+  </div>
+
+</footer>
+
+<script>
+       function button_event() {
+      if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
+        document.form.submit();
+      } else {   //취소
+        return;
+      }
+    }
+  </script>
+</body>
+</html>

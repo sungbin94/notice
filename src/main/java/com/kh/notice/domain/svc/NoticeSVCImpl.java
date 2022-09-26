@@ -15,38 +15,57 @@ public class NoticeSVCImpl implements NoticeSVC {
 
   private final NoticeDAO noticeDAO;
 
+
+  /**
+   * 등록
+   *
+   * @param notice
+   * @return
+   */
   @Override
   public Notice save(Notice notice) {
-    return null;
+    return noticeDAO.save(notice);
   }
 
   @Override
   public Notice findById(Long noticeId) {
-    return null;
+
+    return noticeDAO.findById(noticeId);
   }
 
+
+
+  //수정
   @Override
   public void update(long noticeId, Notice notice) {
-
+    noticeDAO.delete(noticeId);
   }
 
+  @Override
+  public int deleteByNoticeId(Long noticeId) {
+    return 0;
+  }
+
+
+  //삭제
   @Override
   public void delete(Long noticeId) {
-
+    noticeDAO.delete(noticeId);
   }
 
+  //목록
   @Override
   public List<Notice> findAll() {
-    return null;
+    return noticeDAO.findAll();
   }
 
+  //전체삭제
   @Override
   public void deleteAll() {
+    noticeDAO.deleteAll();
 
   }
 
-  @Override
-  public void update(Long view_count, Notice notice) {
 
-  }
+
 }

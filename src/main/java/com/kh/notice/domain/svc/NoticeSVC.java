@@ -5,6 +5,9 @@ import com.kh.notice.domain.dao.Notice;
 import java.util.List;
 
 public interface NoticeSVC {
+
+
+
   /**
    * 등록
    * @param notice
@@ -25,10 +28,10 @@ public interface NoticeSVC {
    */
   void update(long noticeId, Notice notice);
 
-  /**
-   *
-   * @param noticeId
-   */
+
+  int deleteByNoticeId(Long noticeId);
+
+  //삭제
   void delete(Long noticeId);
 
   /**
@@ -42,10 +45,5 @@ public interface NoticeSVC {
    */
   void deleteAll();
 
-  /**
-   *
-   * @param view_count
-   * @param notice
-   */
-  void update(Long view_count, Notice notice);
+
 }

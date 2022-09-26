@@ -46,9 +46,10 @@ public class NoticeDAOImpl implements NoticeDAO {
     return notice;
   }
 
-  //조회
+
   @Override
   public Notice findById(Long noticeId) {
+
     StringBuffer sql = new StringBuffer();
     sql.append("select notice_id, notice_title, notice_content, write_name,view_count,modify_date ");
     sql.append("from notice ");
@@ -64,30 +65,47 @@ public class NoticeDAOImpl implements NoticeDAO {
     return notice;
   }
 
+  //수정
   @Override
   public void update(long noticeId, Notice notice) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("update notice ");
+    sql.append(" set notice_title = '?', ");
+    sql.append(" notice_content = '?', ") ;
+    sql.append(" write_name = '?' ");
+    sql.append(" where notice_id = ? ");
 
+    jt.update(sql.toString(), notice.getTitle(), notice.getContent(), notice.getWrite_name(), noticeId);
   }
 
+  //삭제
   @Override
   public void delete(Long noticeId) {
-
+    String sql = "delete from notice where notice_id = 1; ";
+    jt.update(sql, noticeId);
   }
 
+  //목록
   @Override
   public List<Notice> findAll() {
-    return null;
+    StringBuffer sql = new StringBuffer();
+    sql.append("select notice_id,notice_title,notice_content,write_name,view_count,modify_date ");
+    sql.append("from notice ");
+
+    List<Notice> result = jt.query(sql.toString(), new BeanPropertyRowMapper<>(Notice.class));
+
+    return result;
   }
 
+
+  //전체삭제
   @Override
   public void deleteAll() {
-
+    String sql = ("delete from notice ");
+    int rows = jt.update(sql);
+    log.info("삭제건수:{}",rows);
   }
 
-  @Override
-  public void update(Long view_count, Notice notice) {
-
-  }
 
 
 }

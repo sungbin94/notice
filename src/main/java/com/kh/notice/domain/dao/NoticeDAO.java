@@ -16,7 +16,6 @@ public interface NoticeDAO {
    * @return
    */
   Notice findById(Long noticeId);
-
   /**
    *
    * @param noticeId
@@ -41,10 +40,5 @@ public interface NoticeDAO {
    */
   void deleteAll();
 
-  /**
-   *
-   * @param view_count
-   * @param notice
-   */
-  void update(Long view_count, Notice notice);
+
 }
