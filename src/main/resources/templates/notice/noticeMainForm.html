@@ -55,18 +55,10 @@
     </nav>
   </header>
   <main class=" main-container">
-    <!-- <aside class="main-menu">
-      <h3>커뮤니티</h3>
-      <ul>
-        <li class="notice-menu"><a href=""><i class="fa-solid fa-1"></i>공지사항</a></li>
-        <li class="faq-menu"><a onclick="location.href=''" href="#!"><i class="fa-solid fa-2"></i>FAQ</a></li>
-      </ul>
-    </aside> -->
-    <section class="notice__board">
+    <form class="notice__board" method="get" th:object="${listForm}">
       <div class="notice-title width--800px">
         <h3><i class="bar"></i>공지사항</h3>
       </div>
-
       <!-- notice-board__list area -->
       <div id="notice-board__list">
         <div class="container">
@@ -84,53 +76,20 @@
             <tbody>
             <tr>
               <td><input type="checkbox" class="check"></td>
-              <td>5</td>
-              <th><a onclick="location.href='notice board-view.html'" href="#">[공지사항] 개인정보 처리방침 변경안내처리방침</a></th>
-              <td>2022.08.08</td>
-              <td>관리자</td>
-              <td>10</td>
+              <td th:text="${listForm.noticeId}">5</td>
+              <th><a onclick="" href="#" th:text="${listForm.title}">[공지사항] 개인정보 처리방침 변경안내처리방침</a></th>
+              <td th:text="${listForm.udate}">2022.08.08</td>
+              <td th:text="${listForm.write}">관리자</td>
+              <td th:text="${listForm.count}">10</td>
             </tr>
 
-            <tr>
-              <td><input type="checkbox" class="check"></td>
-              <td>4</td>
-              <th><a onclick="location.href='notice board-view.html'" href="#">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-              <td>2022.07.25</td>
-              <td>관리자</td>
-              <td>20</td>
-            </tr>
-
-            <tr>
-              <td><input type="checkbox" class="check"></td>
-              <td>3</td>
-              <th><a onclick="location.href='notice board-view.html'" href="#">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-              <td>2022.07.15</td>
-              <td>관리자</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" class="check"></td>
-              <td>2</td>
-              <th><a onclick="location.href='notice board-view.html'" href="#">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-              <td>2022.06.25</td>
-              <td>관리자</td>
-              <td>40</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" class="check"></td>
-              <td>1</td>
-              <th><a onclick="location.href='notice board-view.html'" href="#">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-              <td>2022.06.15</td>
-              <td>관리자</td>
-              <td>50</td>
-            </tr>
             </tbody>
           </table>
           <div class="check__del">
             <input type="checkbox" name="" id="allChk"><span>전체선택</span>
           </div>
           <div class="btn__content">
-            <button onclick="location.href='notice board-write.html'" class="btn__text">글쓰기</button>
+            <button type="button" id="post__text-btn">글쓰기</button>
             <button type="button" onclick="button_event();" class="btn__text">삭제</button>
           </div>
           <div class="text__center">
@@ -157,46 +116,51 @@
                 </select>
               </div>
               <div class="notice-board__search-keyword">
-                <input type="text" /><a href="" class="search__search-icon"><i
+                <input type="text"/><a href="" class="search__search-icon"><i
                   class="fa-solid fa-magnifying-glass"></i></a>
               </div>
-
             </div>
           </div>
         </div>
-    </section>
-  </main>
-  <!--Basic structure of footer-->
-  <footer class="footer">
-    <!--The main area of the footer -->
-    <div class="footer-content">
-      <a href="">GR<span>EAT</span></a>
-      <p>이 페이지는 울산지역의 한정으로 만들어진 사이트입니다. 서비스를 이용하시는 모든 회원분들 이용에 감사드립니다. 더더욱 발전하는 GREAT이 되겠습니다. </p>
-      <!--Footer's social icon-->
-      <ul class="socials">
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-      </ul>
-      <p>GREAT센터 365일 오전 10시 - 오후 6시</p>
-      <!-- Footer's menu item-->
-      <div class="footer-menu">
-        <ul class="f-menu">
-          <li><a onclick="location.href='notice board-main.html'" href="">Home</a></li>
-          <li><a onclick="location.href='notice board-view.html'" href="">Join</a></li>
-          <li><a onclick="location.href='notice board-view.html'" href="">Order</a></li>
-          <li><a onclick="location.href='notice board-main.html'" href="">Notice</a></li>
-        </ul>
       </div>
+</form>
+</main>
+<!--Basic structure of footer-->
+<footer class="footer">
+  <!--The main area of the footer -->
+  <div class="footer-content">
+    <a href="">GR<span>EAT</span></a>
+    <p>이 페이지는 울산지역의 한정으로 만들어진 사이트입니다. 서비스를 이용하시는 모든 회원분들 이용에 감사드립니다. 더더욱 발전하는 GREAT이 되겠습니다. </p>
+    <!--Footer's social icon-->
+    <ul class="socials">
+      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+    </ul>
+    <p>GREAT센터 365일 오전 10시 - 오후 6시</p>
+    <!-- Footer's menu item-->
+    <div class="footer-menu">
+      <ul class="f-menu">
+        <li><a onclick="location.href='notice board-main.html'" href="">Home</a></li>
+        <li><a onclick="location.href='notice board-view.html'" href="">Join</a></li>
+        <li><a onclick="location.href='notice board-view.html'" href="">Order</a></li>
+        <li><a onclick="location.href='notice board-main.html'" href="">Notice</a></li>
+      </ul>
     </div>
-    <!--Copyright Area-->
-    <div class="footer-bottom">
-      <p>Design By - <a href="#">365 Team Project</a> </p>
-      <p>tell :<a href="">1501-1501</a></p>
-    </div>
-  </footer>
+  </div>
+  <!--Copyright Area-->
+  <div class="footer-bottom">
+    <p>Design By - <a href="#">365 Team Project</a></p>
+    <p>tell :<a href="">1501-1501</a></p>
+  </div>
+</footer>
 </div>
 <script>
+    const $postBtn = document.getElementById('post__text-btn');
+    $postBtn.addEventListener('click', e => {
+      location.href = '/notice/write';
+    });
+
     const allChkClick_h = e => {
       console.log(`click : ${e.target}`);
 
@@ -215,6 +179,9 @@
         return;
       }
     }
-  </script>
+
+
+
+</script>
 </body>
 </html>

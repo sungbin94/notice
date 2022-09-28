@@ -53,26 +53,26 @@
     </nav>
   </header>
   <main class="container">
-    <div class="board-write__content">
+    <form class="board-write__content" method="post" >
       <div class="board-write__title width--1000px">
         <h2><i class="bar"></i>글수정</h2>
       </div>
       <div class="board-write__head width--1000px">
         <div class="board-write__title">제목:
-          <input type="text" name="" id="" placeholder="제목을 입력하세요." autofocus>
+          <input th:text="*{title}" type="text" name="" id="" placeholder="제목을 입력하세요." autofocus>
         </div>
       </div>
       <div class="board-write__article-main width--1000px">
-          <textarea class="board-write__article-content" name="" id="" cols="30" rows="10" placeholder="내용을 작성하세요."
+          <textarea th:text="*{content}" class="board-write__article-content" name="" id="" cols="30" rows="10" placeholder="내용을 작성하세요."
                     autofocus></textarea>
-        <text><input type="file" name="SelectFile" /></text>
+        <text><input type="file" name="SelectFile"/></text>
       </div>
 
       <div class="board-witre__complete width--1000px">
-        <button onclick="location.href='notice board-main.html'" class="board-witre__cancel-btn">취소</button>
-        <button onclick="location.href='notice board-view.html'" class="board-witre__complete-btn">수정</button>
+        <button type="button" id="write__cancel-btn">취소</button>
+        <button id="write__complete-btn">수정</button>
       </div>
-    </div>
+    </form>
 
   </main>
   <!--Basic structure of footer-->
@@ -108,10 +108,20 @@
 
     <!--Copyright Area-->
     <div class="footer-bottom">
-      <p>Design By - <a href="#">365 Team Project</a> </p>
+      <p>Design By - <a href="#">365 Team Project</a></p>
       <p>tell :<a href="">1501-1501</a></p>
     </div>
-
   </footer>
+</div>
+<script>
+    const $cancelBtn = document.getElementById('witre__cancel-btn');
+     $cancelBtn.addEventListener('click', e => {
+      location.href = '/notice/write';
+    });
+    const $completeBtn = document.getElementById('write__complete-btn');
+     $completeBtn.addEventListener('click', e => {
+      location.href = '/notice';
+    });
+</script>
 </body>
 </html>

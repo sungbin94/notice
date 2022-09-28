@@ -1,18 +1,20 @@
 package com.kh.notice.web;
 
 
-import com.kh.notice.domain.entity.Notice;
+import com.kh.notice.domain.entity.notice.Notice;
 import com.kh.notice.domain.svc.notice.NoticeSVC;
-import com.kh.notice.web.form.AddForm;
+import com.kh.notice.web.form.notice.DetailForm;
+import com.kh.notice.web.form.notice.EditForm;
+import com.kh.notice.web.form.notice.ListForm;
+import com.kh.notice.web.form.notice.WriteForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -22,65 +24,111 @@ public class NoticeController {
 
   private final NoticeSVC noticeSVC;
 
-  //등록화면
-  @GetMapping("")
-  public String addForm(@ModelAttribute AddForm addForm) {
-    return "notice/notice-writeForm";
+  //공지사항 목록화면
+  @GetMapping
+  public String list(ListForm listForm, Model model) {
+
+    List<Notice> list = noticeSVC.findAll();
+
+    BeanUtils.copyProperties(list,listForm);
+
+    model.addAttribute("listForm",listForm);
+
+    return "notice/noticeMainForm";
   }
 
-  //  등록처리
-  @PostMapping("")
-  public String add(
-      @ModelAttribute AddForm addForm,
-      RedirectAttributes redirectAttributes,
-      Model model){
+  //글쓰기화면
+  @GetMapping("/write")
+  public String write(Model model) {
+    model.addAttribute("ItemForm", new WriteForm());
+    return "notice/noticeWriteForm";
+  }
 
-    log.info("NoticeController.add() 호출됨!");
-    log.info("Addform={}",addForm);
+  //글쓰기 처리
+  @PostMapping("/write")
+  public String write(@ModelAttribute WriteForm writeForm) {
 
     Notice notice = new Notice();
-    notice.setTitle(addForm.getTitle());
-    notice.setContent(addForm.getContent());
-    notice.setWrite_name(addForm.getWrite_name());
+    BeanUtils.copyProperties(writeForm, notice);
+    log.info("notice : {}", notice);
 
-    Notice writedNotice = noticeSVC.write(notice);
-    redirectAttributes.addAttribute("noticeId",writedNotice.getNoticeId());
+    noticeSVC.write(notice);
 
-    return "redirect:/notice/{noticeId}/nviewForm";  //http://서버:9080/notice/공지사항번호
+    return "notice/noticeViewForm";
   }
 
-//  //  상세화면
-//  @GetMapping("/{noticeId}/detail")
-//  public String detailForm(@PathVariable Long noticeId, Model model) {
-//
-//    Notice notice = noticeSVC.findByNoticeId(noticeId);
-//
-//    DetailForm detailForm = new DetailForm();
-//    detailForm.setNoticeId(notice.getNoticeId());
-//    detailForm.setTitle(notice.getTitle());
-//    detailForm.setContent(notice.getContent());
-//    detailForm.setWrite_name(notice.getWrite_name());
-//
-//    model.addAttribute("detailForm", detailForm);
-//
-//    return "notice/nviewForm";
-//  }
+  //조회화면
+  @GetMapping("/{id}")
+  public String article(@PathVariable("id") Long noticeId, DetailForm detailForm, Model model) {
+    Notice readNotice = noticeSVC.findById(noticeId);
 
+    BeanUtils.copyProperties(detailForm, readNotice);
 
-//  //수정화면
-//  @GetMapping("/{noticeId}")
-//  public String editForm(@PathVariable Long noticeId, Model model) {
-//
-//    Notice notice = noticeSVC.findByNoticeId(noticeId);
-//
-//    EditForm editForm = new EditForm();
-//    editForm.setNoticeId(notice.getNoticeId());
-//    editForm.setTitle(notice.getTitle());
-//    editForm.setContent(notice.getContent());
-//    editForm.setWrite_name(notice.getWrite_name());
-//
-//    model.addAttribute("editForm", editForm);
-//
-//    return "notice/notice-modifyForm";
-//  }
+    model.addAttribute("detailForm", detailForm);
+
+    return "notice/noticeViewForm";
+  }
+
+  //수정화면
+  @GetMapping("/{id}/edit")
+  public String edit(@PathVariable("id") Long noticeId, Model model) {
+
+    Notice modifyNotice = noticeSVC.findById(noticeId);
+
+    EditForm editForm = new EditForm();
+    BeanUtils.copyProperties(editForm, modifyNotice);
+
+    model.addAttribute("editForm", editForm);
+
+    return "notice/noticeModifyForm";
+  }
+
+  //수정처리
+  @PostMapping("/{id}/edit")
+  public String edit(@PathVariable("id") Long noticeId, EditForm editForm) {
+
+    Notice notice = new Notice();
+    BeanUtils.copyProperties(editForm, notice);
+
+    noticeSVC.modify(noticeId, notice);
+
+    return "redirect:/notice/" + noticeId;
+  }
+
+  //삭제
+  @GetMapping("/{id}/del")
+  public String delete(@PathVariable("id") Long noticeId) {
+
+    noticeSVC.deleteByNoticeId(noticeId);
+
+    return "redirect:/notice/noticeMainForm";
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

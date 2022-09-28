@@ -1,4 +1,4 @@
-package com.kh.notice.web.form;
+package com.kh.notice.web.form.notice;
 
 
 import lombok.Data;
@@ -8,5 +8,5 @@ public class EditForm {
   private Long noticeId;
   private String title;
   private String content;
-  private String write_name;
+  private String write;
 }

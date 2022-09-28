@@ -1,6 +1,6 @@
 package com.kh.notice.domain.svc.notice;
 
-import com.kh.notice.domain.entity.Notice;
+import com.kh.notice.domain.entity.notice.Notice;
 import com.kh.notice.domain.dao.notice.NoticeDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class NoticeSVCImpl implements NoticeSVC {
   @Override
   public Notice write(Notice notice) {
 
-    return noticeDAO.create(notice);
+    return noticeDAO.save(notice);
   }
 
   /**
@@ -44,10 +44,8 @@ public class NoticeSVCImpl implements NoticeSVC {
    * @return
    */
   @Override
-  public Notice findByNoticeId(Long noticeId) {
-    Notice notice = noticeDAO.selectOne(noticeId);
-    noticeDAO.updateCount(noticeId);
-    return notice;
+  public Notice findById(Long noticeId) {
+    return noticeDAO.findById(noticeId);
   }
 
   /**
@@ -56,8 +54,9 @@ public class NoticeSVCImpl implements NoticeSVC {
    * @return
    */
   @Override
-  public Notice modify(Notice notice) {
-    return noticeDAO.update(notice);
+  public void modify(Long noticeId, Notice notice) {
+
+    noticeDAO.update(noticeId, notice);
   }
 
   /**
@@ -66,8 +65,8 @@ public class NoticeSVCImpl implements NoticeSVC {
    * @return
    */
   @Override
-  public int remove(Long noticeId) {
-    return noticeDAO.delete(noticeId);
+  public int deleteByNoticeId(Long noticeId) {
+    return noticeDAO.deleteByNoticeId(noticeId);
   }
 
   /**

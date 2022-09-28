@@ -1,21 +1,29 @@
 package com.kh.notice.domain.svc.notice;
 
-import com.kh.notice.domain.entity.Notice;
+import com.kh.notice.domain.entity.notice.Notice;
 
 import java.util.List;
 
 public interface NoticeSVC {
   //등록
   Notice write(Notice notice);
+
   //전체조회
   List<Notice> findAll();
+
+
   //상세
-  Notice findByNoticeId(Long noticeId);
+  Notice findById(Long noticeId);
+
+
   //수정
-  Notice modify(Notice notice);
+  void modify(Long noticeId, Notice notice);
+
   //삭제
-  int remove(Long noticeId);
+  int deleteByNoticeId(Long noticeId);
+
   //조회수증가
   int increaseCount(Long noticeId);
-}
 
+
+}

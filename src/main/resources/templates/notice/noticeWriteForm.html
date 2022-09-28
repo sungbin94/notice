@@ -8,10 +8,8 @@
   <script src="https://kit.fontawesome.com/844acb7e4d.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/notice/notice board-write.css">
   <link rel="stylesheet" href="/css/common/common.css">
-
-  <title>공지사항 글작성 화면</title>
+  <title>공지사항 글작성</title>
 </head>
-
 <body>
 <div class="wrapper">
   <header class="header container">
@@ -54,30 +52,30 @@
     </nav>
   </header>
   <main class="container">
-    <div class="notice-board content">
+    <form class="notice-board content" method="post">
       <div class="notice-board__title width--1000px">
         <h2><i class="bar"></i>글쓰기</h2>
       </div>
       <div class="notice-board__head width--900px">
         <div class="notice-board__headtitle">제목:
-          <input type="text" name="" id="" placeholder="제목을 입력하세요." autofocus>
+          <input type="text" name="title" id="" placeholder="제목을 입력하세요."  autofocus>
         </div>
       </div>
       <div class="notice-board__main width--1000px">
-          <textarea class="notice-board__content" name="" id="" cols="30" rows="10" placeholder="내용을 작성하세요. 500글자"
+          <textarea  class="notice-board__content" name="content" id="" cols="30" rows="10" placeholder="내용을 작성하세요. 500글자"
                     autofocus maxlength="300"></textarea>
         <div class="insert">
-          <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
+          <div>
             <input type="file" onchange="addFile(this);" multiple />
             <div class="file-list"></div>
-          </form>
+          </div>
         </div>
       </div>
       <div class="notice-board__complete width--1000px">
-        <button onclick="location.href='nmain.html'" class="notice-board__cancel-btn">취소</button>
-        <button onclick="location.href='nview.html'" class="notice-board__complete-btn">등록</button>
+        <button type="button" id="notice__cancel-btn">취소</button>
+        <button  id="notice__complete-btn">등록</button>
       </div>
-    </div>
+    </form>
 
   </main>
 </div>
@@ -110,5 +108,17 @@
     <p>tell :<a href="">1501-1501</a></p>
   </div>
 </footer>
+<script>
+    //  const $completeBtn = document.getElementById('notice__complete-btn');
+    //$completeBtn.addEventListener('click', e => {
+    //  console.log("등록 버튼 클릭");
+    //  location.href = '/notice/write';
+    //});
+
+    const $cancelBtn = document.getElementById('notice__cancel-btn');
+    $cancelBtn.addEventListener('click', e => {
+      location.href = '/notice';
+    });
+</script>
 </body>
 </html>
