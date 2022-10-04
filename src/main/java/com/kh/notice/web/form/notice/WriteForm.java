@@ -1,22 +1,15 @@
 package com.kh.notice.web.form.notice;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.time.LocalDateTime;
+import org.hibernate.validator.constraints.Length;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class WriteForm {
   private Long noticeId;
+  @Length(min = 1, max = 50)
   private String title;
   private String content;
+  private String attachment;
   private String write;
-  private Long count;
-  private LocalDateTime udate;
 }

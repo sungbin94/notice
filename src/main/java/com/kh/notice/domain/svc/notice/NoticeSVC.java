@@ -1,6 +1,7 @@
 package com.kh.notice.domain.svc.notice;
 
 import com.kh.notice.domain.entity.notice.Notice;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -13,14 +14,20 @@ public interface NoticeSVC {
 
 
   //상세
-  Notice findById(Long noticeId);
+  Notice read(Long noticeId);
 
+  /**
+   * 게시글 수정
+   *
+   * @param noticeId 게시글 번호
+   * @param notice    게시글 수정 내용
+   */
+  Notice update(Long noticeId, Notice notice);
 
-  //수정
-  void modify(Long noticeId, Notice notice);
+  Notice update(Long noticeId, Notice notice, List<MultipartFile> files);
 
   //삭제
-  int deleteByNoticeId(Long noticeId);
+  void delete(Long noticeId);
 
   //조회수증가
   int increaseCount(Long noticeId);

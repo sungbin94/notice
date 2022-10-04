@@ -1,15 +1,19 @@
 package com.kh.notice.web.form.notice;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+import java.time.LocalDateTime;
+
+@Data
 public class DetailForm {
   private Long noticeId;             //공시사항번호
+  @Length(min = 1,max = 50)
   private String title;             //제목
   private String content;           //내용
+  private String attachment;
   private String write;       //작성자
+  @DateTimeFormat(pattern = "yyyy.MM.dd.HH.mm")
+  private LocalDateTime udate;
 }

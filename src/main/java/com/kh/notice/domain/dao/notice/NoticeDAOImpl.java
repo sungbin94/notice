@@ -32,8 +32,8 @@ public class NoticeDAOImpl implements NoticeDAO {
   public Notice save(Notice notice) {
 
     StringBuffer sql = new StringBuffer();
-    sql.append("insert into notice(notice_id, title, content, write, count) ");
-    sql.append("values(notice_notice_id_seq.nextval,?,?,1,1) ");
+    sql.append("insert into notice(notice_id, title, content,Attachments, write, count) ");
+    sql.append("values(notice_notice_id_seq.nextval,?,?,?,1,1) ");
 
     //SQL실행
     KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -48,6 +48,7 @@ public class NoticeDAOImpl implements NoticeDAO {
         pstmt.setString(1, notice.getTitle());
         pstmt.setString(2, notice.getContent());
         pstmt.setString(3, notice.getWrite());
+        pstmt.setString(4,notice.getAttachment());
 //        pstmt.setLong(4,notice.getCount());
 
         return pstmt;
@@ -55,7 +56,7 @@ public class NoticeDAOImpl implements NoticeDAO {
     },keyHolder);
 
     long notice_id = Long.valueOf(keyHolder.getKeys().get("notice_id").toString());
-    return findById(notice_id);
+    return read(notice_id);
   }
 
   /**
@@ -81,7 +82,7 @@ public class NoticeDAOImpl implements NoticeDAO {
    * @return
    */
   @Override
-  public Notice findById(Long noticeId) {
+  public Notice read(Long noticeId) {
     StringBuffer sql = new StringBuffer();
     sql.append("select notice_id, title,content,write, count,  udate ");
     sql.append("from notice ");
@@ -103,16 +104,17 @@ public class NoticeDAOImpl implements NoticeDAO {
    * @return
    */
   @Override
-  public void update(Long noticeId, Notice notice) {
+  public int update(Long noticeId, Notice notice) {
     StringBuffer sql = new StringBuffer();
     sql.append("update notice ");
     sql.append("set title = ? , ");
-    sql.append("    content = ? , ");
+    sql.append("    content = ? , attachment = ?, ");
     sql.append("    udate   = ? ");
     sql.append("where notice_id = ? ");
 
-    jt.update(sql.toString(), notice.getTitle(), notice.getContent(), notice.getUdate(), noticeId);
+    int affectedRow = jt.update(sql.toString(), notice.getTitle(), notice.getContent(), notice.getAttachment(), notice.getUdate(), noticeId);
 
+    return affectedRow;
   }
 
   /**
@@ -121,7 +123,7 @@ public class NoticeDAOImpl implements NoticeDAO {
    * @return
    */
   @Override
-  public int deleteByNoticeId(Long noticeId) {
+  public int delete(Long noticeId) {
     StringBuffer sql = new StringBuffer();
     sql.append("delete from notice ");
     sql.append(" where notice_id = ? ");

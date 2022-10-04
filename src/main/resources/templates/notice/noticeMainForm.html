@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/844acb7e4d.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/css/notice/notice board-main.css">
+  <link rel="stylesheet" href="/css/notice/noticeMain.css">
   <link rel="stylesheet" href="/css/common/common.css">
   <title>GREAT 공지사항 보기글</title>
 </head>
@@ -55,7 +55,7 @@
     </nav>
   </header>
   <main class=" main-container">
-    <form class="notice__board" method="get" th:object="${listForm}">
+    <form class="notice__board" method="get">
       <div class="notice-title width--800px">
         <h3><i class="bar"></i>공지사항</h3>
       </div>
@@ -74,13 +74,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="notice :${listForm}">
               <td><input type="checkbox" class="check"></td>
-              <td th:text="${listForm.noticeId}">5</td>
-              <th><a onclick="" href="#" th:text="${listForm.title}">[공지사항] 개인정보 처리방침 변경안내처리방침</a></th>
-              <td th:text="${listForm.udate}">2022.08.08</td>
-              <td th:text="${listForm.write}">관리자</td>
-              <td th:text="${listForm.count}">10</td>
+              <td class="noticeId" th:text="${notice.noticeId}">5</td>
+              <td class="noticeTitle"><a
+                  th:href="@{/notice/{id}(id=${notice.noticeId})}"
+                  onclick="" href="#" th:text="${notice.title}"></a></td>
+              <td class="noticeUdate" th:text="${{notice.udate}}">2022.08.08</td>
+              <td th:text="${notice.write}">관리자</td>
+              <td th:text="${notice.count}">10</td>
             </tr>
 
             </tbody>
@@ -109,18 +111,18 @@
           <div class="notice-board__search">
             <div class="notice-board__search-box">
               <div class="notice-board__search-setting">
-                <select name="" id="">
-                  <option value="">제목+내용</option>
-                  <option value="">제목</option>
-                  <option value="">작성자</option>
+                <select name="searchType" id="searchType">
+                  <option th:value="titleOrContent">제목+내용</option>
+                  <option th:value="title">제목</option>
+                  <option th:value="write">작성자</option>
                 </select>
               </div>
               <div class="notice-board__search-keyword">
-                <input type="text"/><a href="" class="search__search-icon"><i
-                  class="fa-solid fa-magnifying-glass"></i></a>
+                <input type="text" id="keyword" name="keyword"><a href="" class="search__search-icon">
+                <button><i class="fa-solid fa-magnifying-glass">검색</i></button></a>
               </div>
             </div>
-          </div>
+            </div>
         </div>
       </div>
 </form>
@@ -179,9 +181,6 @@
         return;
       }
     }
-
-
-
 </script>
 </body>
 </html>

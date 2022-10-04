@@ -30,6 +30,15 @@ button:hover {
   align-items: center;
   margin: 100px 0px 200px 0px;
 }
+.notice-board__complete{
+  display: flex;
+  justify-content: end;
+}
+
+.notice__write-information{
+  display: flex;
+  justify-content: end;
+}
 
 /* notice-board__title */
 .notice-board__title {
@@ -82,6 +91,7 @@ button:hover {
   border: 1px solid var(--mainBtn-color-gre);
   border-radius: 5px;
 }
+
 
 /* notice-board__tool */
 

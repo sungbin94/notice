@@ -14,15 +14,21 @@ public interface NoticeDAO {
 
 
   //조회
-  Notice findById(Long noticeId);
+  Notice read(Long noticeId);
 
-  //수정
-  void update(Long noticeId,Notice notice);
+  /**
+   * 게시글 수정
+   *
+   * @param noticeId 게시글 번호
+   * @param notice    게시글 수정 내용
+   */
+  int update(Long noticeId, Notice notice);
 
   //삭제
-  int deleteByNoticeId(Long noticeId);
+  int delete(Long noticeId);
 
   //조회수증가
   int updateCount(Long noticeId);
+
 
 }

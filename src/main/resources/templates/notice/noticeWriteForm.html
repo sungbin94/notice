@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/844acb7e4d.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/css/notice/notice board-write.css">
+  <link rel="stylesheet" href="/css/notice/noticeWrite.css">
   <link rel="stylesheet" href="/css/common/common.css">
   <title>공지사항 글작성</title>
 </head>
@@ -52,18 +52,22 @@
     </nav>
   </header>
   <main class="container">
-    <form class="notice-board content" method="post">
+    <form class="notice-board content" method="post" >
       <div class="notice-board__title width--1000px">
         <h2><i class="bar"></i>글쓰기</h2>
       </div>
       <div class="notice-board__head width--900px">
-        <div class="notice-board__headtitle">제목:
-          <input type="text" name="title" id="" placeholder="제목을 입력하세요."  autofocus>
+        <div class="notice-board__headtitle" >제목:
+          <input  type="text" name="title" id="" placeholder="제목을 입력하세요."  autofocus>
         </div>
       </div>
       <div class="notice-board__main width--1000px">
           <textarea  class="notice-board__content" name="content" id="" cols="30" rows="10" placeholder="내용을 작성하세요. 500글자"
                     autofocus maxlength="300"></textarea>
+        <div class="notice__write-information">
+          <span class="font-size--12px" th:text="*{{createDate}}">2022.08.01 13:48</span>
+          <span class="font-size--12px" th:text="|조회  *{views}|">조회 98</span>
+        </div>
         <div class="insert">
           <div>
             <input type="file" onchange="addFile(this);" multiple />
@@ -71,7 +75,7 @@
           </div>
         </div>
       </div>
-      <div class="notice-board__complete width--1000px">
+      <div class="notice-board__complete width--1000px" th:action="@{/notice}">
         <button type="button" id="notice__cancel-btn">취소</button>
         <button  id="notice__complete-btn">등록</button>
       </div>
@@ -109,16 +113,24 @@
   </div>
 </footer>
 <script>
-    //  const $completeBtn = document.getElementById('notice__complete-btn');
-    //$completeBtn.addEventListener('click', e => {
-    //  console.log("등록 버튼 클릭");
-    //  location.href = '/notice/write';
-    //});
+    /*notice__complete-btn.addEventListener('click' e =>{
+      if(!validChk()) return;
+
+      const attachmentValue = document.getElementsByTagName('img').length > 0 ? 'Y' : 'N';
+      const notice = {
+        noticeId :1,
+        noticeTitle : noticeTitle.value,
+        noticeContents : window.editor.getDate(),
+        attachment : attachmentValue
+      };
+      add(notice);
+    })
 
     const $cancelBtn = document.getElementById('notice__cancel-btn');
     $cancelBtn.addEventListener('click', e => {
       location.href = '/notice';
     });
+    }*/
 </script>
 </body>
 </html>
