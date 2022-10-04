@@ -23,7 +23,7 @@ public class Notice{
   private String title;            //--게시글 제목
   @Length(min=1, max=500)
   private String content;          //--게시글 내용
-  private String attachment;        //첨부파일 유무
+  private String attachments;        //첨부파일 유무
   private String write;           //--작성자(관리자)
   private Long count;             //조회수
   @DateTimeFormat(pattern = "yyyy.MM.dd.")

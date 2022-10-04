@@ -48,7 +48,7 @@ public class NoticeDAOImpl implements NoticeDAO {
         pstmt.setString(1, notice.getTitle());
         pstmt.setString(2, notice.getContent());
         pstmt.setString(3, notice.getWrite());
-        pstmt.setString(4,notice.getAttachment());
+        pstmt.setString(4,notice.getAttachments());
 //        pstmt.setLong(4,notice.getCount());
 
         return pstmt;
@@ -66,7 +66,7 @@ public class NoticeDAOImpl implements NoticeDAO {
   @Override
   public List<Notice> selectAll() {
     StringBuffer sql = new StringBuffer();
-    sql.append("select notice_id, title, content, write, count, udate ");
+    sql.append("select notice_id, title, content, write, attachments, count, udate ");
     sql.append("  from notice ");
     sql.append("order by notice_id desc ");
 
@@ -84,7 +84,7 @@ public class NoticeDAOImpl implements NoticeDAO {
   @Override
   public Notice read(Long noticeId) {
     StringBuffer sql = new StringBuffer();
-    sql.append("select notice_id, title,content,write, count,  udate ");
+    sql.append("select notice_id, title,content,attachments,write, count,  udate ");
     sql.append("from notice ");
     sql.append("where notice_id = ? ");
 
@@ -108,7 +108,8 @@ public class NoticeDAOImpl implements NoticeDAO {
     StringBuffer sql = new StringBuffer();
     sql.append("update notice ");
     sql.append("set title = ? , ");
-    sql.append("    content = ? , attachment = ?, ");
+    sql.append("    content = ? , ");
+    sql.append("    Attachments = ?, ");
     sql.append("    udate   = ? ");
     sql.append("where notice_id = ? ");
 
