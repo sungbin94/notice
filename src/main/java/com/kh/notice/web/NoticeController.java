@@ -35,14 +35,10 @@ public class NoticeController {
 
     List<Notice> list = noticeSVC.findAll();
 
-
     log.info("리스트 : {}",list);
-
-//    BeanUtils.copyProperties(list,listForm);
 
     model.addAttribute("listForm",list);
 
-//    log.info("리스트 폼 : {}",listForm);
     return "notice/noticeMainForm";
   }
 
