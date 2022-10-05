@@ -6,6 +6,14 @@ import java.util.List;
 
 public interface NoticeDAO {
 
+  /**
+   * 게시글 목록 조회5 : 검색
+   *
+   * @param filterCondition 분류, 시작 레코드 번호, 종료 레코드 번호, 검색 유형, 검색어
+   * @return
+   */
+  List<Notice> findAll(NoticeFilterCondition filterCondition);
+
   //등록
   Notice save(Notice notice);
 

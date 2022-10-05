@@ -24,6 +24,17 @@ public class NoticeDAOImpl implements NoticeDAO {
   private final JdbcTemplate jt;
 
   /**
+   * 게시글 목록 조회5 : 검색
+   *
+   * @param filterCondition 분류, 시작 레코드 번호, 종료 레코드 번호, 검색 유형, 검색어
+   * @return
+   */
+  @Override
+  public List<Notice> findAll(NoticeFilterCondition filterCondition) {
+    return null;
+  }
+
+  /**
    * 등록
    * @param notice
    * @return

@@ -29,4 +29,5 @@ public interface NoticeSVC {
   //삭제
   void delete(Long noticeId);
 
+
 }

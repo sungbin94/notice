@@ -2,6 +2,7 @@ package com.kh.notice.web;
 
 
 import com.kh.notice.domain.entity.notice.Notice;
+import com.kh.notice.domain.paging.FindCriteria;
 import com.kh.notice.domain.svc.notice.NoticeSVC;
 import com.kh.notice.web.form.notice.DetailForm;
 import com.kh.notice.web.form.notice.EditForm;
@@ -9,6 +10,8 @@ import com.kh.notice.web.form.notice.WriteForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,10 @@ public class NoticeController {
 
   private final NoticeSVC noticeSVC;
 
+  @Autowired
+  @Qualifier("fc10")
+  private FindCriteria fc;
+
 
   //공지사항 목록화면
   @GetMapping
@@ -35,9 +42,9 @@ public class NoticeController {
 
     List<Notice> list = noticeSVC.findAll();
 
-    log.info("리스트 : {}",list);
+    log.info("리스트 : {}", list);
 
-    model.addAttribute("listForm",list);
+    model.addAttribute("listForm", list);
 
     return "notice/noticeMainForm";
   }
