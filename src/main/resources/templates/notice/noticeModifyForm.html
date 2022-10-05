@@ -58,14 +58,13 @@
         <h2><i class="bar"></i>글수정</h2>
       </div>
       <div class="board-write__notice-main width--900px">
-        <input type="text" id="noticeTitle" placeholder="제목을 입력하세요." autofocus>
+        <input type="text" name="title" id="noticeTitle" placeholder="제목을 입력하세요." autofocus th:field="*{title}">
       </div>
       <div class="board-write__notice-main width--900px">
-          <textarea class="board-write__notice-content" id="noticeContents" cols="30" rows="10"
-                    placeholder="내용을 작성하세요." autofocus></textarea>
+          <textarea class="board-write__notice-content" name="content" id="noticeContents" cols="30" rows="10"
+                    placeholder="내용을 작성하세요." autofocus th:field="*{content}"></textarea>
         <text><input type="file" name="SelectFile"/></text>
       </div>
-
       <div class="board-write__complete width--1000px"
       th:action="@{/notice/{id}(id=${editForm.noticeId})}">
         <button type="button" id="cancelBtn"><a href="">취소</a></button>
@@ -105,6 +104,7 @@
 </div>
 </div>
 <script th:inline="javascript">
+
     //취소 버튼 클릭
     const $cancelBtn = document.getElementById('cancelBtn');
      $cancelBtn.addEventListener('click', e => {

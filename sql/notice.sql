@@ -7,7 +7,7 @@ create table notice(
     title          varchar2(150),
     content     Varchar2(1500),
     write         varchar2(30),
-    Attachments  varchar2(1),
+    attachments  varchar2(1),
     count        number(5) default 0,
     udate       timestamp default systimestamp
 );
@@ -19,15 +19,15 @@ drop sequence notice_notice_id_seq;
 create sequence notice_notice_id_seq;
 
 
-insert into notice(notice_id, title, content, write,Attachments, count)
+insert into notice(notice_id, title, content, write,attachments, count)
   values(notice_notice_id_seq.nextval,'제목','내용','관리자','1','1');
 
 
-  select notice_id, title, content, write, Attachments, count, udate
+  select notice_id, title, content, write, attachments, count, udate
 from notice
 order by notice_id desc;
 
-select notice_id, title,content,write,Attachments, count,  udate
+select notice_id, title,content,write,attachments, count,  udate
 from notice
 where notice_id = 44;
 
@@ -46,16 +46,4 @@ rollback;
 SELECT
   * FROM
     notice;
-    where notice_id =161;
-
---전체삭제--
-delete from notice;
-
---전체조회-
-select notice_id,notice_title,notice_content,write_name,view_count,modify_date
-  from notice;
-
- 
- 
- 
- 
+    where notice_id =71;

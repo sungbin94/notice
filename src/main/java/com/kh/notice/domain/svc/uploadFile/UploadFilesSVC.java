@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Optional;
 
-public interface UploadFileSVC {
+public interface UploadFilesSVC {
   /**
    * 업로드 파일 등록 - 단건
    * @param multipartFile 첨부파일

@@ -11,10 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -45,16 +49,14 @@ public class NoticeController {
   //글쓰기화면
   @GetMapping("/write")
   public String write(Model model) {
-    model.addAttribute("ItemForm", new WriteForm());
-
-
+    model.addAttribute("WriteForm", new WriteForm());
 
     return "notice/noticeWriteForm";
   }
 
   //글쓰기 처리
   @PostMapping("/write")
-  public String write(@ModelAttribute WriteForm writeForm, RedirectAttributes redirectAttributes) {
+  public String write(@ModelAttribute WriteForm writeForm, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
 
     Notice notice = new Notice();
     BeanUtils.copyProperties(writeForm, notice);
@@ -97,14 +99,19 @@ public class NoticeController {
 
   //수정처리
   @PostMapping("/edit/{id}")
-  public String edit(@ModelAttribute EditForm editForm, RedirectAttributes redirectAttributes) {
+  public String edit(@PathVariable("id") Long noticeId,
+                     @Valid @ModelAttribute("editForm") EditForm editForm,
+                     BindingResult bindingResult,
+                     RedirectAttributes redirectAttributes) {
 
+    if (bindingResult.hasErrors()) {
+      log.info("bindingResult={}", bindingResult);
+      return "notice/noticeModifyForm";
+    }
     Notice notice = new Notice();
     BeanUtils.copyProperties(editForm, notice);
-    log.info("notice: {}", notice);
+    noticeSVC.update(noticeId, notice);
 
-    Notice update = noticeSVC.update(editForm.getNoticeId(), notice);
-    Long noticeId = update.getNoticeId();
     redirectAttributes.addAttribute("id", noticeId);
     return "redirect:/notice/{id}";
   }
@@ -117,6 +124,18 @@ public class NoticeController {
 
     return "redirect:/notice";
   }
+
+  //검증 오류 메시지
+  private Map<String, String> getErrMsg(BindingResult bindingResult) {
+    Map<String, String> errmsg = new HashMap<>();
+
+    bindingResult.getAllErrors().stream().forEach(objectError -> {
+      errmsg.put(objectError.getCodes()[0], objectError.getDefaultMessage());
+    });
+
+    return errmsg;
+  }
+
 }
 
 

@@ -12,7 +12,7 @@ public class ListForm {
   @Length(min = 1,max = 50)
   private String title;            //--게시글 제목
   private String write;           //--작성자(관리자)
-  private String attachment;
+  private String attachments;
   @DateTimeFormat(pattern = "yyyy.MM.dd.")
   private LocalDateTime udate;
   private Long count;             //조회수

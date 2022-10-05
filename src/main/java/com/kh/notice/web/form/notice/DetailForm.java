@@ -12,7 +12,7 @@ public class DetailForm {
   @Length(min = 1,max = 50)
   private String title;             //제목
   private String content;           //내용
-  private String attachment;
+  private String attachments;
   private String write;       //작성자
   @DateTimeFormat(pattern = "yyyy.MM.dd.HH.mm")
   private LocalDateTime udate;

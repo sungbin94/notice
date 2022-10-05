@@ -2,8 +2,8 @@ package com.kh.notice.domain.svc.uploadFile;
 
 import com.kh.notice.domain.common.AttachCode;
 import com.kh.notice.domain.common.FileUtils;
+import com.kh.notice.domain.dao.uploadFile.UploadFilesDAO;
 import com.kh.notice.domain.entity.uploadFile.UploadFile;
-import com.kh.notice.domain.uploadFile.UploadFileDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,9 +17,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 
-public class UploadFileSVCImpl implements UploadFileSVC{
+public class UploadFilesSVCImpl implements UploadFilesSVC {
 
-  private final UploadFileDAO uploadFileDAO;
+  private final UploadFilesDAO uploadFilesDAO;
   private final FileUtils fileUtils;
 
   /**
@@ -35,7 +35,7 @@ public class UploadFileSVCImpl implements UploadFileSVC{
     //1)스토리지 저장
     UploadFile uploadFile = fileUtils.multipartFileToUploadFile(multipartFile, code, rid);
     //2)첨부파일 메타정보 저장
-    Long affectedRow = uploadFileDAO.addFile(uploadFile);
+    Long affectedRow = uploadFilesDAO.addFile(uploadFile);
     return affectedRow;
   }
 
@@ -47,11 +47,11 @@ public class UploadFileSVCImpl implements UploadFileSVC{
    * @param rid 참조번호
    */
   @Override
-  public void addFile(List<MultipartFile> multipartFiles, AttachCode code, Long rid) {
+  public void addFile(List<MultipartFile> multipartFiles,AttachCode code, Long rid) {
     //1)스토리지 저장
     List<UploadFile> uploadFiles = fileUtils.multipartFilesToUploadFiles(multipartFiles, code, rid);
     //2)첨부파일 메타정보 저장
-    uploadFileDAO.addFile(uploadFiles);
+    uploadFilesDAO.addFile(uploadFiles);
   }
 
   /**
@@ -63,7 +63,7 @@ public class UploadFileSVCImpl implements UploadFileSVC{
    */
   @Override
   public List<UploadFile> getFilesByCodeWithRid(String code, Long rid) {
-    return uploadFileDAO.getFilesByCodeWithRid(code,rid);
+    return uploadFilesDAO.getFilesByCodeWithRid(code,rid);
   }
 
   /**
@@ -74,7 +74,7 @@ public class UploadFileSVCImpl implements UploadFileSVC{
    */
   @Override
   public Optional<UploadFile> findFileByUploadFileId(Long uploadFileId) {
-    return uploadFileDAO.findFileByUploadFileId(uploadFileId);
+    return uploadFilesDAO.findFileByUploadFileId(uploadFileId);
   }
 
   /**
@@ -86,7 +86,7 @@ public class UploadFileSVCImpl implements UploadFileSVC{
   @Override
   public int deleteFileByUploadFileId(Long uploadFileId) {
 
-    Optional<UploadFile> optional = uploadFileDAO.findFileByUploadFileId(uploadFileId);
+    Optional<UploadFile> optional = uploadFilesDAO.findFileByUploadFileId(uploadFileId);
     if (optional.isEmpty()) return 0;
 
     UploadFile uploadFile = optional.get();
@@ -95,7 +95,7 @@ public class UploadFileSVCImpl implements UploadFileSVC{
     fileUtils.deleteAttachFile(AttachCode.valueOf(uploadFile.getCode()),uploadFile.getStoreFilename());
 
     //3) 첨부파일의 메타정보를 삭제한다.
-    int affectedRow = uploadFileDAO.deleteFileByUploadFileId(uploadFileId);
+    int affectedRow = uploadFilesDAO.deleteFileByUploadFileId(uploadFileId);
 
     return affectedRow;
   }
@@ -110,7 +110,7 @@ public class UploadFileSVCImpl implements UploadFileSVC{
   @Override
   public int deleteFileByCodeWithRid(String code, Long rid) {
 
-    List<UploadFile> uploadFiles = uploadFileDAO.getFilesByCodeWithRid(code, rid);
+    List<UploadFile> uploadFiles = uploadFilesDAO.getFilesByCodeWithRid(code, rid);
     if(uploadFiles.size() == 0) return 0;
 
     //1)스토리지 파일을 삭제한다.
@@ -120,8 +120,9 @@ public class UploadFileSVCImpl implements UploadFileSVC{
     }
 
     //2) 첨부파일의 메타정보를 삭제한다.
-    int affectedRow = uploadFileDAO.deleteFileByCodeWithRid(code,rid);
+    int affectedRow = uploadFilesDAO.deleteFileByCodeWithRid(code,rid);
 
     return affectedRow;
   }
 }
+

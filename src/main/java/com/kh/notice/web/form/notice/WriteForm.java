@@ -10,6 +10,6 @@ public class WriteForm {
   @Length(min = 1, max = 50)
   private String title;
   private String content;
-  private String attachment;
-  private String write;
+  private String attachments;
+
 }

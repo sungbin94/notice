@@ -1,4 +1,4 @@
-package com.kh.notice.domain.uploadFile;
+package com.kh.notice.domain.dao.uploadFile;
 
 import com.kh.notice.domain.entity.uploadFile.UploadFile;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class UploadFileDAOImpl implements UploadFileDAO{
+public class UploadFilesDAOImpl implements UploadFilesDAO {
   private final JdbcTemplate jdbcTemplate;
 
   //업로드파일 등록-단건

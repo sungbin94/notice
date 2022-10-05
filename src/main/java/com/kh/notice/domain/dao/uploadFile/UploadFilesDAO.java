@@ -1,11 +1,11 @@
-package com.kh.notice.domain.uploadFile;
+package com.kh.notice.domain.dao.uploadFile;
 
 import com.kh.notice.domain.entity.uploadFile.UploadFile;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UploadFileDAO {
+public interface UploadFilesDAO {
   /**
    * 업로드 파일 등록 - 단건
    * @param uploadFile
@@ -51,4 +51,3 @@ public interface UploadFileDAO {
    */
   int deleteFileByCodeWithRid(String code, Long rid);
 }
-

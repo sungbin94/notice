@@ -32,8 +32,8 @@ public class NoticeDAOImpl implements NoticeDAO {
   public Notice save(Notice notice) {
 
     StringBuffer sql = new StringBuffer();
-    sql.append("insert into notice(notice_id, title, content,Attachments, write, count) ");
-    sql.append("values(notice_notice_id_seq.nextval,?,?,?,1,1) ");
+    sql.append("insert into notice(notice_id, title, content,attachments, write, count) ");
+    sql.append("values(notice_notice_id_seq.nextval,?,?,?,'관리자',1) ");
 
     //SQL실행
     KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -109,11 +109,11 @@ public class NoticeDAOImpl implements NoticeDAO {
     sql.append("update notice ");
     sql.append("set title = ? , ");
     sql.append("    content = ? , ");
-    sql.append("    Attachments = ?, ");
-    sql.append("    udate   = ? ");
+    sql.append("    attachments = ?, ");
+    sql.append("    udate   = sysdate ");
     sql.append("where notice_id = ? ");
 
-    int affectedRow = jt.update(sql.toString(), notice.getTitle(), notice.getContent(), notice.getAttachment(), notice.getUdate(), noticeId);
+    int affectedRow = jt.update(sql.toString(), notice.getTitle(), notice.getContent(), notice.getAttachments(), noticeId);
 
     return affectedRow;
   }
@@ -136,18 +136,14 @@ public class NoticeDAOImpl implements NoticeDAO {
 
   /**
    * 조회수 증가
-   * @param noticeId
-   * @return
+   *
+   * @param noticeId 게시글 번호
+   * @return 수정건수
    */
   @Override
-  public int updateCount(Long noticeId) {
-    StringBuffer sql = new StringBuffer();
-    sql.append("update notice ");
-    sql.append("   set count = count + 1 ");
-    sql.append(" where notice_id = ? ");
-
-    int cnt = jt.update(sql.toString(), noticeId);
-
-    return cnt;
+  public int increaseViewCount(Long noticeId) {
+    String sql = "update notice set count = count +1 where notice_id = ? ";
+    int affectedRow = jt.update(sql, noticeId);
+    return affectedRow;
   }
 }

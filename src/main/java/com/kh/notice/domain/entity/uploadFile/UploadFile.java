@@ -16,3 +16,5 @@ public class UploadFile {
   private LocalDateTime cdate;       //  cdate           timestamp default systimestamp, --등록일시
   private LocalDateTime udate;       //  udate           timestamp default systimestamp  --수정일시
 }
+
+

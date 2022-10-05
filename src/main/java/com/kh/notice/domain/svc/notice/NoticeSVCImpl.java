@@ -4,7 +4,7 @@ import com.kh.notice.domain.common.AttachCode;
 import com.kh.notice.domain.dao.notice.NoticeDAO;
 import com.kh.notice.domain.entity.notice.Notice;
 import com.kh.notice.domain.entity.uploadFile.UploadFile;
-import com.kh.notice.domain.svc.uploadFile.UploadFileSVC;
+import com.kh.notice.domain.svc.uploadFile.UploadFilesSVC;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 public class NoticeSVCImpl implements NoticeSVC {
 
   private final NoticeDAO noticeDAO;
-  private final UploadFileSVC uploadFileSVC;
+  private final UploadFilesSVC uploadFilesSVC;
 
 
   @Override
@@ -46,6 +46,7 @@ public class NoticeSVCImpl implements NoticeSVC {
    */
   @Override
   public Notice read(Long noticeId) {
+    noticeDAO.increaseViewCount(noticeId);
     return noticeDAO.read(noticeId);
   }
 
@@ -76,7 +77,7 @@ public class NoticeSVCImpl implements NoticeSVC {
    */
   @Override
   public void delete(Long noticeId) {
-    List<UploadFile> attachFiles = uploadFileSVC.getFilesByCodeWithRid(AttachCode.P0101.name(), noticeId);
+    List<UploadFile> attachFiles = uploadFilesSVC.getFilesByCodeWithRid(AttachCode.P0101.name(), noticeId);
 
     //2)스토리지 파일 삭제
     List<UploadFile> unionFiles = new LinkedList<>();
@@ -85,13 +86,5 @@ public class NoticeSVCImpl implements NoticeSVC {
    noticeDAO.delete(noticeId);
   }
 
-  /**
-   * 조회수 증가
-   * @param noticeId
-   * @return
-   */
-  @Override
-  public int increaseCount(Long noticeId) {
-    return noticeDAO.updateCount(noticeId);
-  }
+
 }

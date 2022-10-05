@@ -29,8 +29,4 @@ public interface NoticeSVC {
   //삭제
   void delete(Long noticeId);
 
-  //조회수증가
-  int increaseCount(Long noticeId);
-
-
 }

@@ -27,8 +27,13 @@ public interface NoticeDAO {
   //삭제
   int delete(Long noticeId);
 
-  //조회수증가
-  int updateCount(Long noticeId);
+  /**
+   * 조회수 증가
+   * @param noticeId 게시글 번호
+   * @return 수정건수
+   */
+  int increaseViewCount(Long noticeId);
+
 
 
 }
