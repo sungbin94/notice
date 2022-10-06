@@ -49,6 +49,7 @@ public interface NoticeSVC {
    * @return 게시글 전체건수
    */
   int totalCount();
+
   int totalCount(BbsFilterCondition filterCondition);
 
 }

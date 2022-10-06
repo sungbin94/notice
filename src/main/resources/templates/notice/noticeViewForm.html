@@ -59,9 +59,6 @@
         </h2>
         <div class="notice__information">
           <div class="notice__write-information">
-            <span class="font-size--12px">2022.08.12</span>
-            <span>|</span>
-            <span class="font-size--12px">조회 18</span>
 
           </div>
         </div>
@@ -74,7 +71,7 @@
           <button type="button"><a id="modify_btn" th:href="@{/notice/edit/{id}(id=${detailForm.noticeId})}">수정</a>
           </button>
           <button type="button" id="submit_btn">목록</button>
-          <button type="button" id="delBtn" class="delete">삭제</button>
+          <button type="button" id="notice__delBtn" class="delete">삭제</button>
         </div>
       </div>
     </form>
@@ -124,20 +121,11 @@
     });
 
     //삭제버튼
-     const $delBtn = document.getElementById('delBtn');
+     const $delBtn = document.getElementById('notice__delBtn');
       $delBtn.addEventListener('click', e => {
         if(!confirm('삭제하시겠습니까?')) return;
       location.href = '/notice/[[${detailForm.noticeId}]]/del';
     });
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </head></head></html>

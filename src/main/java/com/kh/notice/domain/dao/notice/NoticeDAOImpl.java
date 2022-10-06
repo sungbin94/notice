@@ -147,8 +147,8 @@ public class NoticeDAOImpl implements NoticeDAO {
   public Notice save(Notice notice) {
 
     StringBuffer sql = new StringBuffer();
-    sql.append("insert into notice(notice_id, title, content,attachments, write, count) ");
-    sql.append("values(notice_notice_id_seq.nextval,?,?,?,'관리자',1) ");
+    sql.append("insert into notice(notice_id, title, content,write, count,attachments, udate) ");
+    sql.append("values(notice_notice_id_seq.nextval,?,?,'관리자', 0,?,sysdate) ");
 
     //SQL실행
     KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -257,7 +257,7 @@ public class NoticeDAOImpl implements NoticeDAO {
    */
   @Override
   public int increaseViewCount(Long noticeId) {
-    String sql = "update notice set count = count +1 where notice_id = ? ";
+    String sql = "update notice set count = count + 1 where notice_id = ? ";
     int affectedRow = jt.update(sql, noticeId);
     return affectedRow;
   }

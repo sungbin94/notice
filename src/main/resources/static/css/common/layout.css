@@ -164,9 +164,6 @@
 
 /* footer */
 .footer{
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: #111;
   height: 60px;
   width: 100vw;

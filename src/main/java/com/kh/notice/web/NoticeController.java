@@ -46,12 +46,18 @@ public class NoticeController {
 
   //글쓰기 처리
   @PostMapping("/write")
-  public String write(@ModelAttribute WriteForm writeForm, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+  public String write(@Valid @ModelAttribute WriteForm writeForm, RedirectAttributes redirectAttributes,
+                      BindingResult bindingResult) {
+
+    //검증 : 제목, 내용 글자수 제한
+    if (bindingResult.hasErrors()) {
+      log.info("bindingResult : {}", bindingResult);
+      return "notice/noticeWriteForm";
+    }
 
     Notice notice = new Notice();
     BeanUtils.copyProperties(writeForm, notice);
     log.info("notice : {}", notice);
-
     Notice write = noticeSVC.write(notice);
 
     Notice byId = noticeSVC.read(write.getNoticeId());
@@ -112,7 +118,7 @@ public class NoticeController {
 
     noticeSVC.delete(noticeId);
 
-    return "redirect:/notice";
+    return "redirect:/notice/list";
   }
 
   //검증 오류 메시지

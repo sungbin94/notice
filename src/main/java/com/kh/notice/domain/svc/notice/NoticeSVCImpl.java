@@ -50,8 +50,14 @@ public class NoticeSVCImpl implements NoticeSVC {
     return noticeDAO.findAll(filterCondition);
   }
 
+  /**
+   * 등록
+   * @param notice
+   * @return
+   */
   @Override
   public Notice write(Notice notice) {
+
     return noticeDAO.save(notice);
   }
 

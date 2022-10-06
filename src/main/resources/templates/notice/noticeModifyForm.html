@@ -117,6 +117,28 @@
      $completeBtn.addEventListener('click', e => {
       location.href = '/notice/[[${editForm.noticeId}]]';
     });
+
+       //유효성 체크 함수
+    function validChk() {
+      const regex = / /gi;
+      //제목 입력 필수
+      if (noticeTitle.value.replace(regex, '').length == 0) {
+        alert('제목을 입력해주세요.');
+        return;
+      }
+      //제목 50자 이하
+      if (noticeTitle.value.length > 50) {
+        alert('제목은 50자 이내여야합니다.');
+        return;
+      }
+      //내용 입력 필수
+      if (window.editor.getData().length == 0) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
+      return true;
+    }
 </script>
 </body>
 </html>
