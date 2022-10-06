@@ -1,13 +1,32 @@
 package com.kh.notice.domain.svc.notice;
 
+import com.kh.notice.domain.dao.notice.BbsFilterCondition;
 import com.kh.notice.domain.entity.notice.Notice;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface NoticeSVC {
+
+  /**
+   * 목록
+   * @return
+   */
+  List<Notice> foundAll();
+  List<Notice>  findAll(int startRec, int endRec);
+  //List<Notice>  findAll(String category,int startRec, int endRec);
+
+  /**
+   * 검색
+   * @param filterCondition 분류,시작레코드번호,종료레코드번호,검색유형,검색어
+   * @return
+   */
+  List<Notice>  findAll(BbsFilterCondition filterCondition);
+
+
   //등록
   Notice write(Notice notice);
+
 
   //전체조회
   List<Notice> findAll();
@@ -29,5 +48,12 @@ public interface NoticeSVC {
   //삭제
   void delete(Long noticeId);
 
+  /**
+   * 전체건수
+   * @return 게시글 전체건수
+   */
+  int totalCount();
+//  int totalCount(String bcategory);
+  int totalCount(BbsFilterCondition filterCondition);
 
 }

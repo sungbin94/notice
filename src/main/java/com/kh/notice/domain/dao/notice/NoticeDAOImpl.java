@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.thymeleaf.util.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,15 +24,157 @@ public class NoticeDAOImpl implements NoticeDAO {
 
   private final JdbcTemplate jt;
 
+
   /**
-   * 게시글 목록 조회5 : 검색
+   * 게시글 목록 조회1 : 전체
    *
-   * @param filterCondition 분류, 시작 레코드 번호, 종료 레코드 번호, 검색 유형, 검색어
+   * @return 게시글 리스트
+   */
+  @Override
+  public List<Notice> foundAll() {
+    StringBuffer sql = new StringBuffer();
+    sql.append("SELECT ");
+    sql.append("  noticeid, ");
+    //.append("  bcategory, ");
+    sql.append("  title, ");
+    sql.append("  count, ");
+    sql.append("  content, ");
+    sql.append("  udate ");
+    sql.append("FROM ");
+    sql.append("  notice ");
+    sql.append("Order by notice_id desc");
+
+    List<Notice> list = jt.query(sql.toString(), new BeanPropertyRowMapper<>(Notice.class));
+
+    return list;
+  }
+
+//  @Override
+//  public List<Notice> findAll(String category) {
+//    StringBuffer sql = new StringBuffer();
+//    sql.append("SELECT ");
+//    sql.append("  noticeid, ");
+//    //sql.append("  bcategory, ");
+//    sql.append("  title, ");
+//    sql.append("  count, ");
+//    sql.append("  content, ");
+//    sql.append("  udate ");
+//    sql.append("FROM ");
+//    sql.append("  notice ");
+//    //sql.append("WHERE bcategory = ? ");
+//    sql.append("Order by notice_id desc");
+//
+//    List<Notice> list = jt.query(sql.toString(), new BeanPropertyRowMapper<>(Notice.class),category);
+//
+//    return list;
+//  }
+
+  /**
+   * 게시글 목록 조회3 : 페이지
+   *
+   * @param startRec 첫 페이지
+   * @param endRec   마지막 페이지
+   * @return 게시글 리스트
+   */
+  @Override
+  public List<Notice> findAll(int startRec, int endRec) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("select t1.* ");
+    sql.append("from( ");
+    sql.append("    SELECT ");
+    sql.append("    ROW_NUMBER() OVER (ORDER BY notice_id DESC) no, ");
+    sql.append("    notice_id, ");
+    //sql.append("    bcategory, ");
+    sql.append("    title, ");
+    sql.append("    count, ");
+    sql.append("    content, ");
+    sql.append("    udate ");
+    sql.append("    FROM notice) t1 ");
+    sql.append("where t1.no between ? and ? ");
+
+    List<Notice> list = jt.query(
+        sql.toString(),
+        new BeanPropertyRowMapper<>(Notice.class),
+        startRec, endRec
+    );
+    return list;
+  }
+
+//  @Override
+//  public List<Notice> findAll(String category, int startRec, int endRec) {
+//    StringBuffer sql = new StringBuffer();
+//    sql.append("select t1.* ");
+//    sql.append("from( ");
+//    sql.append("    SELECT ");
+//    sql.append("      ROW_NUMBER() OVER (ORDER BY notice_id DESC) no, ");
+//    sql.append("      notice_id, ");
+//    //sql.append("      bcategory, ");
+//    sql.append("      title, ");
+//    sql.append("      count, ");
+//    sql.append("      content, ");
+//    sql.append("      udate ");
+//    sql.append("    FROM notice ");
+//    sql.append("   where bcategory = ? ) t1 ");
+//    sql.append("where t1.no between ? and ? ");
+//
+//    List<Notice> list = jt.query(
+//        sql.toString(),
+//        new BeanPropertyRowMapper<>(Notice.class),
+//        category, startRec, endRec
+//    );
+//    return list;
+//  }
+
+  /**
+   * 검색
+   *
+   * @param filterCondition 분류,시작레코드번호,종료레코드번호,검색유형,검색어
    * @return
    */
   @Override
-  public List<Notice> findAll(NoticeFilterCondition filterCondition) {
-    return null;
+  public List<Notice> findAll(BbsFilterCondition filterCondition) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("select t1.* ");
+    sql.append("from( ");
+    sql.append("    SELECT  ROW_NUMBER() OVER (ORDER BY notice_id DESC) no, ");
+    sql.append("            notice_id, ");
+    //sql.append("            bcategory, ");
+    sql.append("            title, ");
+    sql.append("            count, ");
+    sql.append("            content, ");
+    sql.append("            udate ");
+    sql.append("      FROM notice ");
+    sql.append("     WHERE ");
+
+    //분류
+    sql = dynamicQuery(filterCondition, sql);
+
+    sql.append(") t1 ");
+    sql.append("where t1.no between ? and ? ");
+
+
+    List<Notice> list = null;
+
+    //게시판 전체
+    if(StringUtils.isEmpty(filterCondition.getCategory())){
+      list = jt.query(
+          sql.toString(),
+          new BeanPropertyRowMapper<>(Notice.class),
+          filterCondition.getStartRec(),
+          filterCondition.getEndRec()
+      );
+      //게시판 분류
+    }else{
+      list = jt.query(
+          sql.toString(),
+          new BeanPropertyRowMapper<>(Notice.class),
+          filterCondition.getCategory(),
+          filterCondition.getStartRec(),
+          filterCondition.getEndRec()
+      );
+    }
+
+    return list;
   }
 
   /**
@@ -156,5 +299,98 @@ public class NoticeDAOImpl implements NoticeDAO {
     String sql = "update notice set count = count +1 where notice_id = ? ";
     int affectedRow = jt.update(sql, noticeId);
     return affectedRow;
+  }
+
+  /**
+   *전체건수
+   * @return
+   */
+  @Override
+  public int totalCount() {
+    String sql = "select count(*) from notice";
+
+    Integer cnt = jt.queryForObject(sql, Integer.class);
+
+    return cnt;
+  }
+
+//  /**
+//   *
+//   * @param bcategory
+//   * @return
+//   */
+//  @Override
+//  public int totalCount(String bcategory) {
+//
+//    String sql = "select count(*) from notice where bcategory = ? ";
+//
+//    Integer cnt = jt.queryForObject(sql, Integer.class, bcategory);
+//
+//    return cnt;
+//  }
+
+
+  /**
+   *
+   * @param filterCondition
+   * @return
+   */
+  @Override
+  public int totalCount(BbsFilterCondition filterCondition) {
+    StringBuffer sql = new StringBuffer();
+
+    sql.append("select count(*) ");
+    sql.append("  from notice  ");
+    sql.append(" where  ");
+
+    sql = dynamicQuery(filterCondition, sql);
+
+    Integer cnt = 0;
+    //게시판 전체 검색 건수
+    if(StringUtils.isEmpty(filterCondition.getCategory())) {
+      cnt = jt.queryForObject(
+          sql.toString(), Integer.class
+      );
+      //게시판 분류별 검색 건수
+    }else{
+      cnt = jt.queryForObject(
+          sql.toString(), Integer.class,
+          filterCondition.getCategory()
+      );
+    }
+
+    return cnt;
+  }
+  private StringBuffer dynamicQuery(BbsFilterCondition filterCondition, StringBuffer sql) {
+    //분류
+    if(StringUtils.isEmpty(filterCondition.getCategory())){
+
+    }else{
+      sql.append("       bcategory = ? ");
+    }
+
+    //분류,검색유형,검색어 존재
+    if(!StringUtils.isEmpty(filterCondition.getCategory()) &&
+        !StringUtils.isEmpty(filterCondition.getSearchType()) &&
+        !StringUtils.isEmpty(filterCondition.getKeyword())){
+
+      sql.append(" AND ");
+    }
+
+    //검색유형
+    switch (filterCondition.getSearchType()){
+      case "TC":  //제목 + 내용
+        sql.append("    (  title    like '%"+ filterCondition.getKeyword()+"%' ");
+        sql.append("    or bcontent like '%"+ filterCondition.getKeyword()+"%' )");
+        break;
+      case "T":   //제목
+        sql.append("       title    like '%"+ filterCondition.getKeyword()+"%' ");
+        break;
+      case "C":   //내용
+        sql.append("       bcontent like '%"+ filterCondition.getKeyword()+"%' ");
+        break;
+      default:
+    }
+    return sql;
   }
 }

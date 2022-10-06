@@ -1,6 +1,7 @@
 package com.kh.notice.domain.svc.notice;
 
 import com.kh.notice.domain.common.AttachCode;
+import com.kh.notice.domain.dao.notice.BbsFilterCondition;
 import com.kh.notice.domain.dao.notice.NoticeDAO;
 import com.kh.notice.domain.entity.notice.Notice;
 import com.kh.notice.domain.entity.uploadFile.UploadFile;
@@ -23,6 +24,37 @@ public class NoticeSVCImpl implements NoticeSVC {
   private final NoticeDAO noticeDAO;
   private final UploadFilesSVC uploadFilesSVC;
 
+
+  /**
+   * 목록
+   *
+   * @return
+   */
+  @Override
+  public List<Notice> foundAll() {
+    return noticeDAO.foundAll();
+  }
+
+  @Override
+  public List<Notice> findAll(int startRec, int endRec) {
+    return noticeDAO.findAll(startRec,endRec);
+  }
+
+//  @Override
+//  public List<Notice> findAll(String category, int startRec, int endRec) {
+//    return noticeDAO.findAll(category,startRec,endRec);
+//  }
+
+  /**
+   * 검색
+   *
+   * @param filterCondition 분류,시작레코드번호,종료레코드번호,검색유형,검색어
+   * @return
+   */
+  @Override
+  public List<Notice> findAll(BbsFilterCondition filterCondition) {
+    return noticeDAO.findAll(filterCondition);
+  }
 
   @Override
   public Notice write(Notice notice) {
@@ -87,6 +119,21 @@ public class NoticeSVCImpl implements NoticeSVC {
   }
 
 
+  //전체건수
+  @Override
+  public int totalCount() {
+    return noticeDAO.totalCount();
+  }
+
+//  @Override
+//  public int totalCount(String bcategory) {
+//    return noticeDAO.totalCount(bcategory);
+//  }
+
+  @Override
+  public int totalCount(BbsFilterCondition filterCondition) {
+    return noticeDAO.totalCount(filterCondition);
+  }
 
 
 }
