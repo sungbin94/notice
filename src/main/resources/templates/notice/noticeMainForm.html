@@ -55,6 +55,7 @@
     </nav>
   </header>
   <main class=" main-container">
+    <div class="notice__board">
       <div class="notice-title width--800px">
         <h3><i class="bar"></i>공지사항</h3>
       </div>
@@ -119,8 +120,8 @@
                   <!--                  <a class="community-page-item" th:classappend="${fc.rc.reqPage == pnum} ? 'active'" href="" th:href="@{|/community/list/${pnum}|}" th:text="${pnum}">1</a>-->
                   <li>
                     <a class="community-page-item" th:classappend="${fc.rc.reqPage == pnum} ? 'active'" href=""
-                     th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${pnum},searchType=${fc.searchType},keyword=${fc.keyword})}"
-                     th:text="${pnum}">1</a>
+                       th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${pnum},searchType=${fc.searchType},keyword=${fc.keyword})}"
+                       th:text="${pnum}">1</a>
                   </li>
                 </th:block>
               </th:block>
@@ -154,41 +155,14 @@
               </div>
               <div class="notice-board__search-keyword">
                 <input type="text" id="keyword" name="keyword" th:field="${fc.keyword}">
-                <button id="searchBtn" type="button"><i class="fa-solid fa-magnifying-glass" >검색</i></button>
+                <button id="searchBtn" type="button"><i class="fa-solid fa-magnifying-glass">검색</i></button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </main>
-  <tbody>
-  <!--            <tr th:each="notice:${list}">-->
-  <!--              <td th:class="noticeId" th:text="${notice.noticeId}">1</td>-->
-  <!--              <td th:class="attachment">-->
-  <!--                <th:block th:if="${notice.attachment == 'Y'}">-->
-  <!--                  &lt;!&ndash;                    <span><i class="fa-regular fa-image"></i></span>&ndash;&gt;-->
-  <!--                  <span><i class="fa-solid fa-image"></i></span>-->
-  <!--                </th:block>-->
-  <!--                <th:block th:if="${notice.attachment == 'N'}">-->
-  <!--                  <span><i class="fa-regular fa-file-lines"></i></span>-->
-  <!--                </th:block>-->
-  <!--              </td>-->
-  <!--              <td class="articleTitle">-->
-  <!--                <a th:href="@{/notice/{id}(id=${notice.noticeId})}"-->
-  <!--                   th:text="${notice.title}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi,-->
-  <!--                  architecto!</a>-->
-  <!--              </td>-->
-  <!--              <td th:class="udate" th:text="${{notice.udate}}">2022.08.01</td>-->
-  <!--              <td th:class="count" th:text="${notice.count}">11</td>-->
-  <!--            </tr>-->
-  <!--            </tbody>-->
-  <!--          </table>-->
-  <!--        </div>-->
-  <!--        <div class="board__write width&#45;&#45;900px">-->
-  <!--          <button id="board__post-btn">글쓰기</button>-->
-  <!--        </div>-->
-
-  <!--</main>-->
   <!--Basic structure of footer-->
   <footer class="footer">
     <!--The main area of the footer -->
@@ -270,6 +244,7 @@
       const url = `/notice/list/1/${$searchType.value}/${$keyword.value}`;
       location.href = url;
   }
+
 
 
 

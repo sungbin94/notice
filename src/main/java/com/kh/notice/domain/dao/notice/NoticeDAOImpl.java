@@ -49,6 +49,26 @@ public class NoticeDAOImpl implements NoticeDAO {
     return list;
   }
 
+//  @Override
+//  public List<Notice> findAll(String category) {
+//    StringBuffer sql = new StringBuffer();
+//    sql.append("SELECT ");
+//    sql.append("  noticeid, ");
+//    //sql.append("  bcategory, ");
+//    sql.append("  title, ");
+//    sql.append("  count, ");
+//    sql.append("  content, ");
+//    sql.append("  udate ");
+//    sql.append("FROM ");
+//    sql.append("  notice ");
+//    //sql.append("WHERE bcategory = ? ");
+//    sql.append("Order by notice_id desc");
+//
+//    List<Notice> list = jt.query(sql.toString(), new BeanPropertyRowMapper<>(Notice.class),category);
+//
+//    return list;
+//  }
+
   /**
    * 게시글 목록 조회3 : 페이지
    *
@@ -142,7 +162,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 
         pstmt.setString(1, notice.getTitle());
         pstmt.setString(2, notice.getContent());
-        //pstmt.setString(3, notice.getWrite());
+        pstmt.setString(3, notice.getWrite());
         pstmt.setString(4,notice.getAttachments());
 
 
@@ -254,6 +274,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 
     return cnt;
   }
+
 
   /**
    *
