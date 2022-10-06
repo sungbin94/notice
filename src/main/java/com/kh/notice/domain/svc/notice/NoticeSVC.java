@@ -14,7 +14,6 @@ public interface NoticeSVC {
    */
   List<Notice> foundAll();
   List<Notice>  findAll(int startRec, int endRec);
-  //List<Notice>  findAll(String category,int startRec, int endRec);
 
   /**
    * 검색
@@ -23,14 +22,11 @@ public interface NoticeSVC {
    */
   List<Notice>  findAll(BbsFilterCondition filterCondition);
 
-
   //등록
   Notice write(Notice notice);
 
-
   //전체조회
   List<Notice> findAll();
-
 
   //상세
   Notice read(Long noticeId);
@@ -53,7 +49,6 @@ public interface NoticeSVC {
    * @return 게시글 전체건수
    */
   int totalCount();
-//  int totalCount(String bcategory);
   int totalCount(BbsFilterCondition filterCondition);
 
 }

@@ -55,7 +55,6 @@
     </nav>
   </header>
   <main class=" main-container">
-    <form class="notice__board" method="get">
       <div class="notice-title width--800px">
         <h3><i class="bar"></i>공지사항</h3>
       </div>
@@ -73,190 +72,152 @@
               <th>조회수</th>
             </tr>
             </thead>
-            <!--            <tbody>-->
-            <!--            <tr th:each="notice :${listForm}">-->
-            <!--              <td><input type="checkbox" class="check"></td>-->
-            <!--              <td class="noticeId" th:text="${notice.noticeId}">5</td>-->
-            <!--              <td class="noticeTitle"><a-->
-            <!--                  th:href="@{/notice/{id}(id=${notice.noticeId})}"-->
-            <!--                  onclick="" href="#" th:text="${notice.title}"></a></td>-->
-            <!--              <td class="noticeUdate" th:text="${{notice.udate}}">2022.08.08</td>-->
-            <!--              <td th:text="${notice.write}">관리자</td>-->
-            <!--              <td th:text="${notice.count}">10</td>-->
-            <!--            </tr>-->
-
-            <!--            </tbody>-->
-            <!--          </table>-->
-            <!--          <div class="check__del">-->
-            <!--            <input type="checkbox" name="" id="allChk"><span>전체선택</span>-->
-            <!--          </div>-->
-            <!--          <div class="btn__content">-->
-            <!--            <button type="button" id="post__text-btn">글쓰기</button>-->
-            <!--            <button type="button" onclick="button_event();" class="btn__text">삭제</button>-->
-            <!--          </div>-->
-            <!--          <div class="text__center">-->
-            <!--            <ul class="pagination">-->
-            <!--              <li><a href="">처음</a></li>-->
-            <!--              <li><a href="">이전</a></li>-->
-            <!--              <li><a href="">1</a></li>-->
-            <!--              <li><a href="">2</a></li>-->
-            <!--              <li><a href="">3</a></li>-->
-            <!--              <li><a href="">4</a></li>-->
-            <!--              <li><a href="">5</a></li>-->
-            <!--              <li><a href="">다음</a></li>-->
-            <!--              <li><a href="">마지막</a></li>-->
-            <!--            </ul>-->
-            <!--          </div>-->
-            <!--          &lt;!&ndash; notice-board__search  &ndash;&gt;-->
-            <!--          <div class="notice-board__search">-->
-            <!--            <div class="notice-board__search-box">-->
-            <!--              <div class="notice-board__search-setting">-->
-            <!--                <select name="searchType" id="searchType">-->
-            <!--                  <option th:value="titleOrContent">제목+내용</option>-->
-            <!--                  <option th:value="title">제목</option>-->
-            <!--                  <option th:value="write">작성자</option>-->
-            <!--                </select>-->
-            <!--              </div>-->
-            <!--              <div class="notice-board__search-keyword">-->
-            <!--                <input type="text" id="keyword" name="keyword"><a href="" class="search__search-icon">-->
-            <!--                <button><i class="fa-solid fa-magnifying-glass">검색</i></button>-->
-            <!--              </a>-->
-            <!--              </div>-->
-            <!--            </div>-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <!--      </div>-->
-            <!--    </form>-->
-            <!--  </main>-->
             <tbody>
-            <tr th:each="notice:${list}">
-              <td th:class="noticeId" th:text="${notice.noticeId}">1</td>
-              <td th:class="attachment">
-                <th:block th:if="${notice.attachment == 'Y'}">
-                  <!--                    <span><i class="fa-regular fa-image"></i></span>-->
-                  <span><i class="fa-solid fa-image"></i></span>
-                </th:block>
-                <th:block th:if="${notice.attachment == 'N'}">
-                  <span><i class="fa-regular fa-file-lines"></i></span>
-                </th:block>
-              </td>
-              <td class="articleTitle">
-                <a th:href="@{/notice/{id}(id=${notice.noticeId})}"
-                   th:text="${notice.title}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi,
-                  architecto!</a>
-              </td>
-              <td th:class="udate" th:text="${{notice.udate}}">2022.08.01</td>
-              <td th:class="count" th:text="${notice.count}">11</td>
+            <tr th:each="notice :${listForm}">
+              <td><input type="checkbox" class="check"></td>
+              <td class="noticeId" th:text="${notice.noticeId}">5</td>
+              <td class="noticeTitle"><a
+                  th:href="@{/notice/{id}(id=${notice.noticeId})}"
+                  onclick="" href="#" th:text="${notice.title}"></a></td>
+              <td class="noticeUdate" th:text="${{notice.udate}}">2022.08.08</td>
+              <td th:text="${notice.write}">관리자</td>
+              <td th:text="${notice.count}">10</td>
             </tr>
             </tbody>
           </table>
-        </div>
-        <div class="board__write width--900px">
-          <button id="board__post-btn">글쓰기</button>
-        </div>
-        <!--        <div class="board__page width&#45;&#45;900px">-->
-        <!--          <div class="board__page&#45;&#45;select">-->
-        <!--            <a href=""><i class="fa-solid fa-chevron-left"></i>이전</a>-->
-        <!--            <a href="">1</a>-->
-        <!--            <a href="">2</a>-->
-        <!--            <a href="">3</a>-->
-        <!--            <a href="">4</a>-->
-        <!--            <a href="">5</a>-->
-        <!--            <a href="">다음<i class="fa-solid fa-chevron-right"></i></a>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="board__search width&#45;&#45;900px">-->
-        <!--          <form class="board__search-box" th:object="${articleSearchForm}" th:action="@{/community/search}">-->
-        <!--            <div class="board__search-setting">-->
-        <!--              <select name="" id="search-category" th:field="*{searchCategory}">-->
-        <!--                <option value="title">제목</option>-->
-        <!--                <option value="contents">내용</option>-->
-        <!--                <option value="titleOrContents">제목+내용</option>-->
-        <!--                <option value="nickname">닉네임</option>-->
-        <!--              </select>-->
-        <!--            </div>-->
-        <!--            <div class="board__search-keyword">-->
-        <!--              <input type="text" th:field="*{searchKeyword}"><button class="search__search-icon"><i-->
-        <!--                  class="fa-solid fa-magnifying-glass"></i></button>-->
-        <!--            </div>-->
-        <!--          </form>-->
-        <!--        </div>-->
-        <div class="community-page">
-          <!--이전페이지정보-->
-          <th:block th:if="${fc.prev}">
-            <a class="community-page-item" href=""
-               th:href="@{/notice/list/1/{searchType}/{keyword}(searchType=${fc.searchType},keyword=${fc.keyword})}">
-              <i class="fas fa-angle-double-left"></i>
-            </a>
-            <a class="community-page-item" href=""
-               th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${fc.startPage-1},searchType=${fc.searchType},keyword=${fc.keyword})}">
-              <i class="fas fa-angle-left"></i>
-            </a>
-          </th:block>
+          <div class="check__del">
+            <input type="checkbox" name="" id="allChk"><span>전체선택</span>
+          </div>
+          <div class="btn__content">
+            <button type="button" id="post__text-btn">글쓰기</button>
+            <button type="button" onclick="button_event();" class="btn__text">삭제</button>
+          </div>
+          <div class="text__center">
+            <ul class="pagination">
+              <!--              <li><a href="">처음</a></li>-->
+              <!--              <li><a href="">이전</a></li>-->
+              <!--이전페이지정보-->
+              <th:block th:if="${fc.prev}">
+                <li>
+                  <a class="notice-page-item" href=""
+                     th:href="@{/notice/list/1/{searchType}/{keyword}(searchType=${fc.searchType},keyword=${fc.keyword})}">처음</a>
+                </li>
+                <li>
+                  <a class="notice-page-item" href=""
+                     th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${fc.startPage-1},searchType=${fc.searchType},keyword=${fc.keyword})}">이전</a>
+                </li>
+              </th:block>
 
-          <!--페이지표시-->
-          <th:block th:each="pnum : ${#numbers.sequence(fc.startPage,fc.endPage)}">
-            <th:block th:if="${pnum != 0}">
-              <!--                  <a class="community-page-item" th:classappend="${fc.rc.reqPage == pnum} ? 'active'" href="" th:href="@{|/community/list/${pnum}|}" th:text="${pnum}">1</a>-->
-              <a class="community-page-item" th:classappend="${fc.rc.reqPage == pnum} ? 'active'" href=""
-                 th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${pnum},searchType=${fc.searchType},keyword=${fc.keyword})}"
-                 th:text="${pnum}">1</a>
-            </th:block>
-          </th:block>
+              <!--              <li><a href="">1</a></li>-->
+              <!--              <li><a href="">2</a></li>-->
+              <!--              <li><a href="">3</a></li>-->
+              <!--              <li><a href="">4</a></li>-->
+              <!--              <li><a href="">5</a></li>-->
+              <!--페이지표시-->
+              <th:block th:each="pnum : ${#numbers.sequence(fc.startPage,fc.endPage)}">
+                <th:block th:if="${pnum != 0}">
+                  <!--                  <a class="community-page-item" th:classappend="${fc.rc.reqPage == pnum} ? 'active'" href="" th:href="@{|/community/list/${pnum}|}" th:text="${pnum}">1</a>-->
+                  <li>
+                    <a class="community-page-item" th:classappend="${fc.rc.reqPage == pnum} ? 'active'" href=""
+                     th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${pnum},searchType=${fc.searchType},keyword=${fc.keyword})}"
+                     th:text="${pnum}">1</a>
+                  </li>
+                </th:block>
+              </th:block>
 
-          <!--다음페이지정보-->
-          <th:block th:if="${fc.next}">
-            <a class="community-page-item" href=""
-               th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${fc.endPage+1},searchType=${fc.searchType},keyword=${fc.keyword})}">
-              <i class="fas fa-angle-right"></i>
-            </a>
-            <a class="community-page-item" href=""
-               th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${fc.finalEndPage},searchType=${fc.searchType},keyword=${fc.keyword})}">
-              <i class="fas fa-angle-double-right"></i>
-            </a>
-          </th:block>
-        </div>
-
-        <div class="community-search">
-          <select id="searchType" name="searchType" th:field="${fc.searchType}">
-            <option th:value="title">제목</option>
-            <option th:value="contents">내용</option>
-            <option th:value="titleOrContents">제목+내용</option>
-          </select>
-          <input type="text" id="keyword" name="keyword" th:field="${fc.keyword}">
-          <button id="searchBtn">검색</button>
+              <!--다음페이지정보-->
+              <th:block th:if="${fc.next}">
+                <li>
+                  <a class="community-page-item" href=""
+                     th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${fc.endPage+1},searchType=${fc.searchType},keyword=${fc.keyword})}">
+                    다음</a>
+                </li>
+                <li>
+                  <a class="community-page-item" href=""
+                     th:href="@{/notice/list/{reqPage}/{searchType}/{keyword}(reqPage=${fc.finalEndPage},searchType=${fc.searchType},keyword=${fc.keyword})}">
+                    마지막</a>
+                </li>
+              </th:block>
+              <!--              <li><a href="">다음</a></li>-->
+              <!--              <li><a href="">마지막</a></li>-->
+            </ul>
+          </div>
+          <!-- notice-board__search  -->
+          <div class="notice-board__search">
+            <div class="notice-board__search-box">
+              <div class="notice-board__search-setting">
+                <select name="searchType" id="searchType" th:field="${fc.searchType}">
+                  <option th:value="TC">제목+내용</option>
+                  <option th:value="T">제목</option>
+                  <option th:value="C">내용</option>
+                </select>
+              </div>
+              <div class="notice-board__search-keyword">
+                <input type="text" id="keyword" name="keyword" th:field="${fc.keyword}">
+                <button id="searchBtn" type="button"><i class="fa-solid fa-magnifying-glass" >검색</i></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-</main>
-<!--Basic structure of footer-->
-<footer class="footer">
-  <!--The main area of the footer -->
-  <div class="footer-content">
-    <a href="">GR<span>EAT</span></a>
-    <p>이 페이지는 울산지역의 한정으로 만들어진 사이트입니다. 서비스를 이용하시는 모든 회원분들 이용에 감사드립니다. 더더욱 발전하는 GREAT이 되겠습니다. </p>
-    <!--Footer's social icon-->
-    <ul class="socials">
-      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-      <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-    </ul>
-    <p>GREAT센터 365일 오전 10시 - 오후 6시</p>
-    <!-- Footer's menu item-->
-    <div class="footer-menu">
-      <ul class="f-menu">
-        <li><a onclick="location.href='notice board-main.html'" href="">Home</a></li>
-        <li><a onclick="location.href='notice board-view.html'" href="">Join</a></li>
-        <li><a onclick="location.href='notice board-view.html'" href="">Order</a></li>
-        <li><a onclick="location.href='notice board-main.html'" href="">Notice</a></li>
+  </main>
+  <tbody>
+  <!--            <tr th:each="notice:${list}">-->
+  <!--              <td th:class="noticeId" th:text="${notice.noticeId}">1</td>-->
+  <!--              <td th:class="attachment">-->
+  <!--                <th:block th:if="${notice.attachment == 'Y'}">-->
+  <!--                  &lt;!&ndash;                    <span><i class="fa-regular fa-image"></i></span>&ndash;&gt;-->
+  <!--                  <span><i class="fa-solid fa-image"></i></span>-->
+  <!--                </th:block>-->
+  <!--                <th:block th:if="${notice.attachment == 'N'}">-->
+  <!--                  <span><i class="fa-regular fa-file-lines"></i></span>-->
+  <!--                </th:block>-->
+  <!--              </td>-->
+  <!--              <td class="articleTitle">-->
+  <!--                <a th:href="@{/notice/{id}(id=${notice.noticeId})}"-->
+  <!--                   th:text="${notice.title}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi,-->
+  <!--                  architecto!</a>-->
+  <!--              </td>-->
+  <!--              <td th:class="udate" th:text="${{notice.udate}}">2022.08.01</td>-->
+  <!--              <td th:class="count" th:text="${notice.count}">11</td>-->
+  <!--            </tr>-->
+  <!--            </tbody>-->
+  <!--          </table>-->
+  <!--        </div>-->
+  <!--        <div class="board__write width&#45;&#45;900px">-->
+  <!--          <button id="board__post-btn">글쓰기</button>-->
+  <!--        </div>-->
+
+  <!--</main>-->
+  <!--Basic structure of footer-->
+  <footer class="footer">
+    <!--The main area of the footer -->
+    <div class="footer-content">
+      <a href="">GR<span>EAT</span></a>
+      <p>이 페이지는 울산지역의 한정으로 만들어진 사이트입니다. 서비스를 이용하시는 모든 회원분들 이용에 감사드립니다. 더더욱 발전하는 GREAT이 되겠습니다. </p>
+      <!--Footer's social icon-->
+      <ul class="socials">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
       </ul>
+      <p>GREAT센터 365일 오전 10시 - 오후 6시</p>
+      <!-- Footer's menu item-->
+      <div class="footer-menu">
+        <ul class="f-menu">
+          <li><a onclick="location.href='notice board-main.html'" href="">Home</a></li>
+          <li><a onclick="location.href='notice board-view.html'" href="">Join</a></li>
+          <li><a onclick="location.href='notice board-view.html'" href="">Order</a></li>
+          <li><a onclick="location.href='notice board-main.html'" href="">Notice</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <!--Copyright Area-->
-  <div class="footer-bottom">
-    <p>Design By - <a href="#">365 Team Project</a></p>
-    <p>tell :<a href="">1501-1501</a></p>
-  </div>
-</footer>
+    <!--Copyright Area-->
+    <div class="footer-bottom">
+      <p>Design By - <a href="#">365 Team Project</a></p>
+      <p>tell :<a href="">1501-1501</a></p>
+    </div>
+  </footer>
 </div>
 <script>
     const $postBtn = document.getElementById('post__text-btn');
@@ -282,6 +243,35 @@
         return;
       }
     }
+
+
+  //검색
+  const $searchType = document.getElementById('searchType');
+  const $keyword    = document.getElementById('keyword');
+  const $searchBtn  = document.getElementById('searchBtn');
+
+  //검색 버튼 클릭시
+  $searchBtn?.addEventListener('click', search_f);
+
+  //키워드 입력필드에 엔터키 눌렀을때 검색
+  $keyword?.addEventListener('keydown', e=>{
+      if(e.key === 'Enter') {
+          search_f(e);
+      }
+  });
+
+  function search_f(e){
+      //검색어입력 유무체크
+      if($keyword.value.trim().length === 0){
+         alert('검색어를 입력하세요');
+         $keyword.focus();$keyword.select(); //커서이동
+         return false;
+      }
+      const url = `/notice/list/1/${$searchType.value}/${$keyword.value}`;
+      location.href = url;
+  }
+
+
 
 
 

@@ -11,5 +11,6 @@ public class WriteForm {
   private String title;
   private String content;
   private String attachments;
+  private String write;
 
 }

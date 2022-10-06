@@ -24,7 +24,6 @@ public class NoticeSVCImpl implements NoticeSVC {
   private final NoticeDAO noticeDAO;
   private final UploadFilesSVC uploadFilesSVC;
 
-
   /**
    * 목록
    *
@@ -39,11 +38,6 @@ public class NoticeSVCImpl implements NoticeSVC {
   public List<Notice> findAll(int startRec, int endRec) {
     return noticeDAO.findAll(startRec,endRec);
   }
-
-//  @Override
-//  public List<Notice> findAll(String category, int startRec, int endRec) {
-//    return noticeDAO.findAll(category,startRec,endRec);
-//  }
 
   /**
    * 검색
@@ -82,7 +76,6 @@ public class NoticeSVCImpl implements NoticeSVC {
     return noticeDAO.read(noticeId);
   }
 
-
   /**
    * 게시글 수정
    *
@@ -118,22 +111,14 @@ public class NoticeSVCImpl implements NoticeSVC {
    noticeDAO.delete(noticeId);
   }
 
-
   //전체건수
   @Override
   public int totalCount() {
     return noticeDAO.totalCount();
   }
 
-//  @Override
-//  public int totalCount(String bcategory) {
-//    return noticeDAO.totalCount(bcategory);
-//  }
-
   @Override
   public int totalCount(BbsFilterCondition filterCondition) {
     return noticeDAO.totalCount(filterCondition);
   }
-
-
 }

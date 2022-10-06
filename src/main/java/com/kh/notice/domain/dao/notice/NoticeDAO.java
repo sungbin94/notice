@@ -11,10 +11,8 @@ public interface NoticeDAO {
    * @return
    */
   List<Notice>  foundAll();
-  //List<Notice>  findAll(String category);
 
   List<Notice>  findAll(int startRec, int endRec);
-  //List<Notice>  findAll(String category,int startRec, int endRec);
 
   /**
    * 검색
@@ -23,13 +21,11 @@ public interface NoticeDAO {
    */
   List<Notice>  findAll(BbsFilterCondition filterCondition);
 
-
   //등록
   Notice save(Notice notice);
 
   //전체조회
   List<Notice> selectAll();
-
 
   //조회
   Notice read(Long noticeId);
@@ -59,7 +55,4 @@ public interface NoticeDAO {
   int totalCount();
   //int totalCount(String bcategory);
   int totalCount(BbsFilterCondition filterCondition);
-
-
-
 }

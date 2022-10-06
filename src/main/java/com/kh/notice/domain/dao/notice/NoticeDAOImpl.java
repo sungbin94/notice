@@ -49,26 +49,6 @@ public class NoticeDAOImpl implements NoticeDAO {
     return list;
   }
 
-//  @Override
-//  public List<Notice> findAll(String category) {
-//    StringBuffer sql = new StringBuffer();
-//    sql.append("SELECT ");
-//    sql.append("  noticeid, ");
-//    //sql.append("  bcategory, ");
-//    sql.append("  title, ");
-//    sql.append("  count, ");
-//    sql.append("  content, ");
-//    sql.append("  udate ");
-//    sql.append("FROM ");
-//    sql.append("  notice ");
-//    //sql.append("WHERE bcategory = ? ");
-//    sql.append("Order by notice_id desc");
-//
-//    List<Notice> list = jt.query(sql.toString(), new BeanPropertyRowMapper<>(Notice.class),category);
-//
-//    return list;
-//  }
-
   /**
    * 게시글 목록 조회3 : 페이지
    *
@@ -84,7 +64,6 @@ public class NoticeDAOImpl implements NoticeDAO {
     sql.append("    SELECT ");
     sql.append("    ROW_NUMBER() OVER (ORDER BY notice_id DESC) no, ");
     sql.append("    notice_id, ");
-    //sql.append("    bcategory, ");
     sql.append("    title, ");
     sql.append("    count, ");
     sql.append("    content, ");
@@ -100,31 +79,6 @@ public class NoticeDAOImpl implements NoticeDAO {
     return list;
   }
 
-//  @Override
-//  public List<Notice> findAll(String category, int startRec, int endRec) {
-//    StringBuffer sql = new StringBuffer();
-//    sql.append("select t1.* ");
-//    sql.append("from( ");
-//    sql.append("    SELECT ");
-//    sql.append("      ROW_NUMBER() OVER (ORDER BY notice_id DESC) no, ");
-//    sql.append("      notice_id, ");
-//    //sql.append("      bcategory, ");
-//    sql.append("      title, ");
-//    sql.append("      count, ");
-//    sql.append("      content, ");
-//    sql.append("      udate ");
-//    sql.append("    FROM notice ");
-//    sql.append("   where bcategory = ? ) t1 ");
-//    sql.append("where t1.no between ? and ? ");
-//
-//    List<Notice> list = jt.query(
-//        sql.toString(),
-//        new BeanPropertyRowMapper<>(Notice.class),
-//        category, startRec, endRec
-//    );
-//    return list;
-//  }
-
   /**
    * 검색
    *
@@ -138,13 +92,11 @@ public class NoticeDAOImpl implements NoticeDAO {
     sql.append("from( ");
     sql.append("    SELECT  ROW_NUMBER() OVER (ORDER BY notice_id DESC) no, ");
     sql.append("            notice_id, ");
-    //sql.append("            bcategory, ");
     sql.append("            title, ");
     sql.append("            count, ");
     sql.append("            content, ");
     sql.append("            udate ");
     sql.append("      FROM notice ");
-    sql.append("     WHERE ");
 
     //분류
     sql = dynamicQuery(filterCondition, sql);
@@ -156,23 +108,12 @@ public class NoticeDAOImpl implements NoticeDAO {
     List<Notice> list = null;
 
     //게시판 전체
-    if(StringUtils.isEmpty(filterCondition.getCategory())){
-      list = jt.query(
-          sql.toString(),
-          new BeanPropertyRowMapper<>(Notice.class),
-          filterCondition.getStartRec(),
-          filterCondition.getEndRec()
-      );
-      //게시판 분류
-    }else{
-      list = jt.query(
-          sql.toString(),
-          new BeanPropertyRowMapper<>(Notice.class),
-          filterCondition.getCategory(),
-          filterCondition.getStartRec(),
-          filterCondition.getEndRec()
-      );
-    }
+    list = jt.query(
+        sql.toString(),
+        new BeanPropertyRowMapper<>(Notice.class),
+        filterCondition.getStartRec(),
+        filterCondition.getEndRec()
+    );
 
     return list;
   }
@@ -201,9 +142,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 
         pstmt.setString(1, notice.getTitle());
         pstmt.setString(2, notice.getContent());
-        pstmt.setString(3, notice.getWrite());
+        //pstmt.setString(3, notice.getWrite());
         pstmt.setString(4,notice.getAttachments());
-//        pstmt.setLong(4,notice.getCount());
+
 
         return pstmt;
       }
@@ -314,22 +255,6 @@ public class NoticeDAOImpl implements NoticeDAO {
     return cnt;
   }
 
-//  /**
-//   *
-//   * @param bcategory
-//   * @return
-//   */
-//  @Override
-//  public int totalCount(String bcategory) {
-//
-//    String sql = "select count(*) from notice where bcategory = ? ";
-//
-//    Integer cnt = jt.queryForObject(sql, Integer.class, bcategory);
-//
-//    return cnt;
-//  }
-
-
   /**
    *
    * @param filterCondition
@@ -341,53 +266,35 @@ public class NoticeDAOImpl implements NoticeDAO {
 
     sql.append("select count(*) ");
     sql.append("  from notice  ");
-    sql.append(" where  ");
 
     sql = dynamicQuery(filterCondition, sql);
 
     Integer cnt = 0;
     //게시판 전체 검색 건수
-    if(StringUtils.isEmpty(filterCondition.getCategory())) {
-      cnt = jt.queryForObject(
-          sql.toString(), Integer.class
-      );
-      //게시판 분류별 검색 건수
-    }else{
-      cnt = jt.queryForObject(
-          sql.toString(), Integer.class,
-          filterCondition.getCategory()
-      );
-    }
+    cnt = jt.queryForObject(sql.toString(), Integer.class);
 
     return cnt;
   }
   private StringBuffer dynamicQuery(BbsFilterCondition filterCondition, StringBuffer sql) {
-    //분류
-    if(StringUtils.isEmpty(filterCondition.getCategory())){
-
-    }else{
-      sql.append("       bcategory = ? ");
-    }
 
     //분류,검색유형,검색어 존재
-    if(!StringUtils.isEmpty(filterCondition.getCategory()) &&
-        !StringUtils.isEmpty(filterCondition.getSearchType()) &&
-        !StringUtils.isEmpty(filterCondition.getKeyword())){
-
-      sql.append(" AND ");
+    if(!StringUtils.isEmpty(filterCondition.getSearchType()) && !StringUtils.isEmpty(filterCondition.getKeyword())){
+      sql.append(" where ");
+    }else {
+      return sql;
     }
 
     //검색유형
     switch (filterCondition.getSearchType()){
       case "TC":  //제목 + 내용
         sql.append("    (  title    like '%"+ filterCondition.getKeyword()+"%' ");
-        sql.append("    or bcontent like '%"+ filterCondition.getKeyword()+"%' )");
+        sql.append("    or content like '%"+ filterCondition.getKeyword()+"%' )");
         break;
       case "T":   //제목
         sql.append("       title    like '%"+ filterCondition.getKeyword()+"%' ");
         break;
       case "C":   //내용
-        sql.append("       bcontent like '%"+ filterCondition.getKeyword()+"%' ");
+        sql.append("       content like '%"+ filterCondition.getKeyword()+"%' ");
         break;
       default:
     }

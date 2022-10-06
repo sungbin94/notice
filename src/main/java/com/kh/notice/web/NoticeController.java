@@ -36,20 +36,6 @@ public class NoticeController {
   @Qualifier("fc10")
   private FindCriteria fc;
 
-
-  //공지사항 목록화면
-  @GetMapping
-  public String list(Model model) {
-
-    List<Notice> list = noticeSVC.findAll();
-
-    log.info("리스트 : {}", list);
-
-    model.addAttribute("listForm", list);
-
-    return "notice/noticeMainForm";
-  }
-
   //글쓰기화면
   @GetMapping("/write")
   public String write(Model model) {
@@ -140,6 +126,7 @@ public class NoticeController {
     return errmsg;
   }
 
+  //공지사항 목록화면
   @GetMapping({"/list",
       "/list/{reqPage}",
       "/list/{reqPage}//",
@@ -148,10 +135,8 @@ public class NoticeController {
       @PathVariable(required = false) Optional<Integer> reqPage,
       @PathVariable(required = false) Optional<String> searchType,
       @PathVariable(required = false) Optional<String> keyword,
-      //@RequestParam(required = false) Optional<String> category,
       Model model) {
     log.info("/list 요청됨{},{},{},{}",reqPage,searchType,keyword);
-
 
     //FindCriteria 값 설정
     fc.getRc().setReqPage(reqPage.orElse(1)); //요청페이지, 요청없으면 1
@@ -159,46 +144,25 @@ public class NoticeController {
     fc.setKeyword(keyword.orElse(""));        //검색어
 
     List<Notice> list = null;
-    //게시물 목록 전체
-    //if(category == null || StringUtils.isEmpty(cate)) {
+    //검색어 있음
+    if(searchType.isPresent() && keyword.isPresent()){
+      log.info("1");
+      BbsFilterCondition filterCondition = new BbsFilterCondition(
+          fc.getRc().getStartRec(), fc.getRc().getEndRec(),
+          searchType.get(),
+          keyword.get());
+      fc.setTotalRec(noticeSVC.totalCount(filterCondition));
+      fc.setSearchType(searchType.get());
+      fc.setKeyword(keyword.get());
+      list = noticeSVC.findAll(filterCondition);
 
-      //검색어 있음
-      if(searchType.isPresent() && keyword.isPresent()){
-        BbsFilterCondition filterCondition = new BbsFilterCondition(
-            "",fc.getRc().getStartRec(), fc.getRc().getEndRec(),
-            searchType.get(),
-            keyword.get());
-        fc.setTotalRec(noticeSVC.totalCount(filterCondition));
-        fc.setSearchType(searchType.get());
-        fc.setKeyword(keyword.get());
-        list = noticeSVC.findAll(filterCondition);
-
-        //검색어 없음
-      }else {
-        //총레코드수
-        fc.setTotalRec(noticeSVC.totalCount());
-        list = noticeSVC.findAll(fc.getRc().getStartRec(), fc.getRc().getEndRec());
-      }
-
-      //카테고리별 목록
-    //}
-//    else{
-//      //검색어 있음
-//      if(searchType.isPresent() && keyword.isPresent()){
-//        BbsFilterCondition filterCondition = new BbsFilterCondition(
-//            category.get(),fc.getRc().getStartRec(), fc.getRc().getEndRec(),
-//            searchType.get(),
-//            keyword.get());
-//        fc.setTotalRec(noticeSVC.totalCount(filterCondition));
-//        fc.setSearchType(searchType.get());
-//        fc.setKeyword(keyword.get());
-//        list = noticeSVC.findAll(filterCondition);
-//        //검색어 없음
-//      }else {
-//        fc.setTotalRec(noticeSVC.totalCount(cate));
-//        list = noticeSVC.findAll(cate, fc.getRc().getStartRec(), fc.getRc().getEndRec());
-//      }
-//    }
+      //검색어 없음
+    }else {
+      log.info("2");
+      //총레코드수
+      fc.setTotalRec(noticeSVC.totalCount());
+      list = noticeSVC.findAll(fc.getRc().getStartRec(), fc.getRc().getEndRec());
+    }
 
     List<ListForm> partOfList = new ArrayList<>();
     for (Notice notice : list) {
@@ -207,19 +171,11 @@ public class NoticeController {
       partOfList.add(listForm);
     }
 
-    model.addAttribute("list", partOfList);
+    model.addAttribute("listForm", partOfList);
     model.addAttribute("fc",fc);
-    //model.addAttribute("category", cate);
 
-    return "notice/list";
+    return "notice/noticeMainForm";
   }
-
-  //쿼리스트링 카테고리 읽기, 없으면 ""반환
-//  private String getCategory(Optional<String> category) {
-//    String cate = category.isPresent()? category.get():"";
-//    log.info("category={}", cate);
-//    return cate;
-//  }
 
 }
 
