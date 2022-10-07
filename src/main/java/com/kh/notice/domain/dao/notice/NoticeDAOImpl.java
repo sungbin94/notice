@@ -257,7 +257,7 @@ public class NoticeDAOImpl implements NoticeDAO {
    */
   @Override
   public int increaseViewCount(Long noticeId) {
-    String sql = "update notice set count = count + 1 where notice_id = ? ";
+    String sql = "update notice set count = count +1 where notice_id = ? ";
     int affectedRow = jt.update(sql, noticeId);
     return affectedRow;
   }

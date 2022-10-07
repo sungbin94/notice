@@ -62,8 +62,8 @@ public class NoticeController {
     log.info("notice : {}", notice);
     Notice write = noticeSVC.write(notice);
 
-    Notice byId = noticeSVC.read(write.getNoticeId());
-    Long noticeId = byId.getNoticeId();
+    //otice byId = noticeSVC.read(write.getNoticeId());
+    Long noticeId = write.getNoticeId();
     redirectAttributes.addAttribute("id",noticeId);
 
     return "redirect:/notice/{id}";
