@@ -39,15 +39,17 @@ public class NoticeController {
   //글쓰기화면
   @GetMapping("/write")
   public String write(Model model) {
-    model.addAttribute("WriteForm", new WriteForm());
+    model.addAttribute("writeForm", new WriteForm());
 
     return "notice/noticeWriteForm";
   }
 
   //글쓰기 처리
   @PostMapping("/write")
-  public String write(@Valid @ModelAttribute WriteForm writeForm, RedirectAttributes redirectAttributes,
-                      BindingResult bindingResult) {
+  public String write(@Valid @ModelAttribute WriteForm writeForm,
+                      BindingResult bindingResult,
+                      RedirectAttributes redirectAttributes
+                      ) {
 
     //검증 : 제목, 내용 글자수 제한
     if (bindingResult.hasErrors()) {
@@ -75,6 +77,7 @@ public class NoticeController {
     BeanUtils.copyProperties(readNotice, detailForm);
 
     model.addAttribute("detailForm", detailForm);
+    log.info("실패");
 
     return "notice/noticeViewForm";
   }

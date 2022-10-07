@@ -108,6 +108,8 @@ button:hover {
     box-sizing: border-box;
     height: 30px;
     border:1px solid var(--mainBtn-color-gre);
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .board-write__notice-content {
   width: 100%;
@@ -146,3 +148,4 @@ button:hover {
 .board-write__complete-btn {
   background-color: var(--main-color-yel);
 }
+

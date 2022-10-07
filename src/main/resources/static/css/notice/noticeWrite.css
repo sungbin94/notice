@@ -43,6 +43,7 @@ button:hover {
 /* notice-board__title */
 .notice-board__title {
   border-bottom: 1px solid black;
+
 }
 
 .bar {
@@ -71,25 +72,21 @@ button:hover {
   justify-content: initial;
 }
 
-.notice-board__headtitle {
+.notice-board__headtitle{
   display: flex;
   flex: none;
-  border-bottom: 1px solid black;
-  padding-bottom: 10px;
   align-items: baseline;
   font-weight: bold;
   font-size: 15px;
 }
 
 .notice-board__headtitle input {
-  display: flex;
   flex: none;
   margin-bottom: 10px;
-  width: 50vw;
+  width:   1000px;
   box-sizing: border-box;
   height: 30px;
   border: 1px solid var(--mainBtn-color-gre);
-  border-radius: 5px;
 }
 
 
@@ -160,3 +157,4 @@ button:hover {
   font-weight: bold;
   cursor: pointer;
 }
+

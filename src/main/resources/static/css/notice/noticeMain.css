@@ -23,7 +23,21 @@ button:hover {
   height: 24px;
   background-color: var(--main-color-yel);
   margin-right: 5px;
-  
+}
+
+#post__text-btn {
+  background-color: var(--main-color-yel);
+  width: 60px;
+  height: 25px;
+  margin: 5px 0 10px 5px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn__content {
+
 }
 
 /* .main-container{

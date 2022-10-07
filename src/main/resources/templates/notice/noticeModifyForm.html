@@ -8,7 +8,24 @@
   <script src="https://kit.fontawesome.com/844acb7e4d.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/notice/noticeModify.css">
   <link rel="stylesheet" href="/css/common/common.css">
+  <script th:src="@{/css/common/js/ckeditor.js}"></script>
   <title>공지사항 수정화면</title>
+
+  <style>
+    .board-write__notice-main span {
+      color: red;
+    }
+      #modifyBtn, #cancelBtn{
+        background-color: var(--main-color-yel);
+        margin: 5px 0 10px 5px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 40px;
+        height: 30px;
+      }
+  </style>
 </head>
 
 <body>
@@ -59,15 +76,15 @@
       </div>
       <div class="board-write__notice-main width--900px">
         <input type="text" name="title" id="noticeTitle" placeholder="제목을 입력하세요." autofocus th:field="*{title}">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
       </div>
       <div class="board-write__notice-main width--900px">
-          <textarea class="board-write__notice-content" name="content" id="noticeContents" cols="30" rows="10"
+          <textarea class="board-write__notice-content" name="content" id="noticeContent" cols="30" rows="10"
                     placeholder="내용을 작성하세요." autofocus th:field="*{content}"></textarea>
-        <text><input type="file" name="SelectFile"/></text>
       </div>
       <div class="board-write__complete width--1000px"
       th:action="@{/notice/{id}(id=${editForm.noticeId})}">
-        <button type="button" id="cancelBtn"><a href="">취소</a></button>
+        <button id="cancelBtn">취소</button>
         <button id="modifyBtn">수정</button>
       </div>
     </form>
@@ -108,9 +125,10 @@
     //취소 버튼 클릭
     const $cancelBtn = document.getElementById('cancelBtn');
      $cancelBtn.addEventListener('click', e => {
+     console.log('클릭');
+     if(!confirm('게시글 수정을 취소하시겠습니까?')) return;
       location.href = '/notice/[[${editForm.noticeId}]]';
     });
-
 
     //수정버튼 클릭
     const $completeBtn = document.getElementById('modifyBtn');
@@ -138,7 +156,71 @@
       }
 
       return true;
-    }
+    };
+
+    //ckeditor
+    ClassicEditor
+		.create( document.querySelector( '#noticeContent' ), {
+		 plugin:['ListStyle','Markdown','MediaEmbed','MediaEmbedToolbar'],
+			toolbar: {
+				items: [
+					'heading',
+					'|',
+					'underline',
+					'bold',
+					'italic',
+					'link',
+					'bulletedList',
+					'numberedList',
+					'todoList',
+					'|',
+					'outdent',
+					'indent',
+					'|',
+					'imageInsert',
+					'imageUpload',
+					'blockQuote',
+					'insertTable',
+					'mediaEmbed',
+					'markdown',
+					'undo',
+					'redo',
+					'|',
+					'highlight',
+					'fontFamily',
+					'fontColor',
+					'fontBackgroundColor',
+					'fontSize',
+					'|',
+					'htmlEmbed',
+					'specialCharacters'
+				]
+			},
+			language: 'en',
+			image: {
+				toolbar: [
+					'imageTextAlternative',
+					'imageStyle:full',
+					'imageStyle:side'
+				]
+			},
+			table: {
+				contentToolbar: [
+					'tableColumn',
+					'tableRow',
+					'mergeTableCells',
+					'tableCellProperties',
+					'tableProperties'
+				]
+			},
+		})
+		.then( editor => {
+
+			window.editor = editor;
+		} )
+		.catch( error => {
+			console.error( error );
+		} );
 </script>
 </body>
 </html>
