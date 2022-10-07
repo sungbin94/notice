@@ -88,8 +88,7 @@
           </table>
 
           <div class="btn__content">
-            <button type="button" id="post__text-btn">글쓰기</button>
-
+            <button id="post__text-btn">글쓰기</button>
           </div>
           <div class="text__center">
             <ul class="pagination">
@@ -194,6 +193,19 @@
 
       const $choose = document.querySelectorAll('.notice-board__table input[type=checkbox]')
       console.log($choose);
+
+
+      $choose.forEach($choose => $choose.checked = e.target.checked ? true : false);
+    }
+    document.getElementById('allChk').addEventListener('click', allChkClick_h);
+
+    function button_event() {
+      if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
+        document.form.submit();
+      } else {   //취소
+        return;
+      }
+    }
 
 
   //검색
